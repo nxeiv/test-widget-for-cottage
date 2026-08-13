@@ -1,22 +1,146 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Cottage★ Discord</title>
+    <title>The Cottage★ — Hangout</title>
+
+```
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Arial, sans-serif;
+        background:
+            radial-gradient(circle at top, #30364a 0%, #181a22 45%, #101116 100%);
+        color: white;
+        padding: 24px;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 900px;
+        text-align: center;
+    }
+
+    .header {
+        margin-bottom: 28px;
+    }
+
+    .logo {
+        font-size: 52px;
+        margin-bottom: 8px;
+    }
+
+    h1 {
+        margin: 0;
+        font-size: 34px;
+        letter-spacing: 1px;
+    }
+
+    .subtitle {
+        margin-top: 10px;
+        color: #b9bdc9;
+        font-size: 16px;
+    }
+
+    .card {
+        background: rgba(25, 27, 36, 0.88);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 20px;
+        padding: 24px;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(10px);
+    }
+
+    .card-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 18px;
+    }
+
+    iframe {
+        width: 100%;
+        max-width: 350px;
+        height: 500px;
+        border: 0;
+        border-radius: 12px;
+    }
+
+    .footer {
+        margin-top: 22px;
+        color: #777c8a;
+        font-size: 13px;
+    }
+
+    .footer span {
+        color: #aaaeba;
+    }
+
+    @media (max-width: 500px) {
+        body {
+            padding: 15px;
+        }
+
+        .logo {
+            font-size: 42px;
+        }
+
+        h1 {
+            font-size: 28px;
+        }
+
+        .card {
+            padding: 16px;
+        }
+
+        iframe {
+            height: 500px;
+        }
+    }
+</style>
+```
+
 </head>
+
 <body>
 
-    <h1>The Cottage★</h1>
+```
+<main class="container">
 
-    <iframe
-        src="https://discord.com/widget?id=1398568016915992667&theme=dark"
-        width="350"
-        height="500"
-        allowtransparency="true"
-        frameborder="0"
-        sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
-    </iframe>
+    <header class="header">
+        <div class="logo">🏡</div>
+        <h1>The Cottage★</h1>
+        <div class="subtitle">
+            A little place to hang out, chat, and chill.
+        </div>
+    </header>
+
+    <section class="card">
+        <div class="card-title">💬 Come hang out with us</div>
+
+        <iframe
+            src="https://discord.com/widget?id=1398568016915992667&theme=dark"
+            allowtransparency="true"
+            frameborder="0"
+            sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+        </iframe>
+    </section>
+
+    <div class="footer">
+        The Cottage★ <span>•</span> Just a place to chill.
+    </div>
+
+</main>
+```
 
 </body>
 </html>
