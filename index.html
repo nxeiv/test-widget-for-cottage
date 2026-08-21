@@ -57,6 +57,12 @@
     object-fit: cover;
     border-radius: 20px;
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.30);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.50);
 }
 
 h1 a {
@@ -144,9 +150,11 @@ iframe {
 <main class="container">
 
 <header class="header">
-    <div class="logo">
+<div class="logo">
+    <a href="index.html">
         <img src="IMG_8048.jpg" alt="The Cottage Logo">
-    </div>
+    </a>
+</div>
 
     <h1>
         <a href="index.html">The Cottage★</a>
