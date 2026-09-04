@@ -27,7 +27,7 @@
     background:
         linear-gradient(
             rgba(10, 11, 16, 0.68),
-            rgba(10, 11, 16, 0.60)
+            rgba(10, 11, 16, 0.68)
         ),
         url("2C58F125-5521-4799-A848-55533DF42A82.gif");
 
@@ -40,11 +40,24 @@
     padding: 24px;
 }
 
-    .container {
-        width: 100%;
-        max-width: 900px;
-        text-align: center;
+    @keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
     }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+    .container {
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+    animation: fadeUp 0.6s ease-out;
+}
 
     .header {
         margin-bottom: 28px;
@@ -60,12 +73,23 @@
     object-fit: cover;
     border-radius: 20px;
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.30);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .logo img:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(255, 255, 255, 0.50);
+    box-shadow:
+        0 0 25px rgba(255, 255, 255, 0.50),
+        0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+h1 {
+    font-size: 32px;
+    letter-spacing: -0.5px;
+    margin: 0;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
 }
 
 h1 a {
@@ -77,12 +101,13 @@ h1 a {
 h1 a:hover {
     opacity: 0.75;
 }
-
-    .subtitle {
-        margin-top: 10px;
-        color: #b9bdc9;
-        font-size: 16px;
-    }
+    
+.subtitle {
+    margin-top: 10px;
+    color: #c5c8cf;
+    font-size: 15px;
+    line-height: 1.6;
+}
 
     .subtitle .creator {
     color: #7ee787;
@@ -94,15 +119,47 @@ h1 a:hover {
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 20px;
     padding: 24px;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
+    box-shadow:
+    0 15px 50px rgba(0, 0, 0, 0.35),
+    0 0 30px rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(10px);
 }
+
+    .card + .card {
+    margin-top: 20px;
+}
     
-    .card-title {
-        font-size: 20px;
-        font-weight: bold;
-        margin-bottom: 18px;
-    }
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #f2f2f2;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.12);
+}
+
+    .smp-card p {
+    margin: 0 0 18px 0;
+    color: #c5c8cf;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+    .smp-card {
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.smp-card:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.075);
+    border-color: rgba(255, 255, 255, 0.16);
+    box-shadow:
+        0 15px 50px rgba(0, 0, 0, 0.35),
+        0 0 30px rgba(255, 255, 255, 0.06);
+}
     
 .smp-button {
     display: inline-block;
@@ -118,44 +175,59 @@ h1 a:hover {
     font-weight: bold;
     font-size: 14px;
 
-    transition: background 0.2s ease, transform 0.2s ease;
+    transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .smp-button:hover {
     background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.25);
     transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(255, 255, 255, 0.08);
 }
+    
 iframe {
     width: 100%;
     max-width: 350px;
     height: 500px;
     border: 0;
     border-radius: 12px;
-    box-shadow: 0 0 18px rgba(255, 255, 255, 0.20);
+    box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.25),
+    0 0 18px rgba(255, 255, 255, 0.10);
 }
 
-    .footer {
-        margin-top: 22px;
-        color: #777c8a;
-        font-size: 13px;
-    }
+.footer {
+    margin-top: 22px;
+    color: #aaaeba;
+    font-size: 13px;
+    line-height: 1.6;
+}
 
-    .footer .footer-title {
-    color: white;
-    font-weight: bold;
+.footer .footer-title {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.footer span {
+    color: #aaaeba;
+}
+
+.footer .maintained {
+    color: #c5c8cf;
+}
+
+.footer .credit {
+    color: #8fd8ff;
+    font-weight: 600;
 }
 
     .footer span {
-        color: #aaaeba;
-    }
-
-.footer .maintained {
-    color: #d0d3da;
-}
-    
-.footer .credit {
-    color: #8fd8ff;
-    font-weight: bold;
+    display: inline-block;
+    margin: 0 2px;
 }
     
     @media (max-width: 500px) {
