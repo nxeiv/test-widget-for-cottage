@@ -212,6 +212,50 @@ h1 a:hover {
         border-color 0.2s ease,
         transform 0.2s ease;
 }
+
+      .tutorials-card {
+    margin-top: 20px;
+}
+
+.tutorial {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.055),
+        rgba(255, 255, 255, 0.025)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 14px;
+    text-align: left;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.tutorial:last-child {
+    margin-bottom: 0;
+}
+
+.tutorial:hover {
+    background: rgba(255, 255, 255, 0.075);
+    border-color: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+}
+
+.tutorial h3 {
+    margin: 0 0 7px 0;
+    font-size: 16px;
+    color: #f5f5f5;
+}
+
+.tutorial p {
+    margin: 0;
+    color: #c5c8cf;
+    line-height: 1.6;
+    font-size: 14px;
+}
       
 </style>
   
@@ -325,7 +369,64 @@ h1 a:hover {
     
     
 </section>
-  
+
+<section class="card tutorials-card">
+
+    <div class="card-title">
+        Feature Tutorials
+    </div>
+
+    <div class="tutorial">
+        <h3>GriefPrevention</h3>
+        <p>
+            Use <strong>/claimhelp</strong> in chat to open the in-game claiming tutorial.
+        </p>
+    </div>
+
+    <div class="tutorial">
+        <h3>Better Mending</h3>
+        <p>
+            Crouch + right click while holding your mending equipment to repair it using your XP.
+        </p>
+    </div>
+
+    <div class="tutorial">
+        <h3>Ultimate Teams</h3>
+        <p>
+            Use <strong>/team gui</strong> to open the team menu, or use the available team commands.
+        </p>
+    </div>
+
+    <div class="tutorial">
+        <h3>TPA & RTP</h3>
+        <p>
+            Use the teleport commands to request a teleport to another player or randomly teleport around the world.
+        </p>
+    </div>
+
+    <div class="tutorial">
+        <h3>Veinminer</h3>
+        <p>
+            Use the Veinminer key or command to mine connected ores and logs at once.
+        </p>
+    </div>
+
+    <div class="tutorial">
+        <h3>Click Villagers</h3>
+        <p>
+            Crouch and/or right click villagers to access their additional features.
+        </p>
+    </div>
+
+    <div class="tutorial">
+        <h3>GSit</h3>
+        <p>
+            Use <strong>/sit</strong>, or crouch + right click to sit.
+        </p>
+    </div>
+
+</section>
+    
 </main>
   
 </body>
