@@ -1,328 +1,65 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Cottage★ | Discord★</title>
-    <link rel="icon" type="image/png" href="IMG_8048-modified.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The Cottage★ — a friendly Discord community and The Cottage★ SMP.">
+<title>The Cottage★ | Discord★</title>
+<link rel="icon" type="image/png" href="IMG_8048-modified.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-    * {
-        box-sizing: border-box;
-    }
-
-    body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: "Inter", Arial, sans-serif;
-
-    background:
-        linear-gradient(
-            rgba(10, 11, 16, 0.68),
-            rgba(10, 11, 16, 0.68)
-        ),
-        url("2C58F125-5521-4799-A848-55533DF42A82.gif");
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-
-    color: white;
-    padding: 24px;
-}
-
-    @keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(12px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-    .container {
-    width: 100%;
-    max-width: 900px;
-    text-align: center;
-    animation: fadeUp 0.6s ease-out;
-}
-
-    .header {
-        margin-bottom: 28px;
-    }
-
-    .logo {
-    margin-bottom: 14px;
-}
-
-.logo img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 20px;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.30);
-    transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-.logo img:hover {
-    transform: scale(1.05);
-    box-shadow:
-        0 0 25px rgba(255, 255, 255, 0.50),
-        0 8px 20px rgba(0, 0, 0, 0.25);
-}
-
-h1 {
-    font-size: 32px;
-    letter-spacing: -0.5px;
-    margin: 0;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
-}
-
-h1 a {
-    color: white;
-    text-decoration: none;
-    transition: opacity 0.2s ease;
-}
-
-h1 a:hover {
-    opacity: 0.75;
-}
-    
-.subtitle {
-    margin-top: 10px;
-    color: #c5c8cf;
-    font-size: 15px;
-    line-height: 1.6;
-}
-
-    .subtitle .creator {
-    color: #7ee787;
-    font-weight: bold;
-}
-
-   .card {
-    background: rgba(25, 27, 36, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
-    padding: 24px;
-    box-shadow:
-    0 15px 50px rgba(0, 0, 0, 0.35),
-    0 0 30px rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(14px);
-}
-
-    .card + .card {
-    margin-top: 20px;
-}
-
-    .card:first-of-type {
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease,
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.card:first-of-type:hover {
-    background: rgba(255, 255, 255, 0.065);
-    border-color: rgba(255, 255, 255, 0.14);
-}
-    
-.card-title {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #f2f2f2;
-    text-shadow: 0 0 12px rgba(255, 255, 255, 0.12);
-}
-
-.smp-card p {
-    max-width: 600px;
-    margin: 0 auto 18px auto;
-    color: #c5c8cf;
-    line-height: 1.6;
-    font-size: 14px;
-}
-
-    .smp-card {
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease,
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.smp-card:hover {
-    transform: translateY(-3px);
-    background: rgba(255, 255, 255, 0.075);
-    border-color: rgba(255, 255, 255, 0.16);
-    box-shadow:
-        0 15px 50px rgba(0, 0, 0, 0.35),
-        0 0 30px rgba(255, 255, 255, 0.06);
-}
-    
-.smp-button {
-    display: inline-block;
-    margin-top: 4px;
-    padding: 10px 18px;
-
-    background: rgba(255, 255, 255, 0.10);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 10px;
-
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 14px;
-
-    transition:
-    background 0.2s ease,
-    border-color 0.2s ease,
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.smp-button:hover {
-    background: rgba(255, 255, 255, 0.18);
-    border-color: rgba(255, 255, 255, 0.25);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(255, 255, 255, 0.08);
-}
-    
-iframe {
-    width: 100%;
-    max-width: 350px;
-    height: 500px;
-    border: 0;
-    border-radius: 12px;
-    box-shadow:
-    0 8px 25px rgba(0, 0, 0, 0.25),
-    0 0 18px rgba(255, 255, 255, 0.10);
-}
-
-.footer {
-    margin-top: 22px;
-    color: #aaaeba;
-    font-size: 13px;
-    line-height: 1.6;
-}
-
-.footer .footer-title {
-    color: #ffffff;
-    font-weight: 600;
-}
-
-.footer span {
-    color: #aaaeba;
-}
-
-.footer .maintained {
-    color: #c5c8cf;
-}
-
-.footer .credit {
-    color: #8fd8ff;
-    font-weight: 600;
-}
-
-    .footer span {
-    display: inline-block;
-    margin: 0 2px;
-}
-    
-@media (max-width: 500px) {
-    body {
-        padding: 16px;
-    }
-
-    h1 {
-        font-size: 28px;
-    }
-
-    .subtitle {
-        font-size: 14px;
-    }
-
-    .card {
-        padding: 20px;
-    }
-
-    iframe {
-        height: 450px;
-    }
-}
-
+*{box-sizing:border-box}
+:root{--text:#fff;--muted:#c5c8cf;--soft:#9fa4b2;--card:rgba(20,22,30,.62);--line:rgba(255,255,255,.1)}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;font-family:"Inter",Arial,sans-serif;color:var(--text);padding:24px;background:linear-gradient(rgba(8,10,15,.72),rgba(8,10,15,.72)),url("2C58F125-5521-4799-A848-55533DF42A82.gif");background-size:cover;background-position:center;background-attachment:fixed}
+.container{width:100%;max-width:960px;margin:0 auto}
+.hero{text-align:center;padding:22px 0 30px;animation:fadeUp .6s ease-out}
+.logo{display:inline-block;margin-bottom:16px}.logo img{width:104px;height:104px;object-fit:cover;border-radius:24px;box-shadow:0 0 26px rgba(255,255,255,.22);transition:.25s ease}.logo:hover img{transform:translateY(-3px) scale(1.03);box-shadow:0 0 34px rgba(255,255,255,.34)}
+h1{margin:0;font-size:clamp(32px,6vw,46px);letter-spacing:-1.2px}h1 a{color:#fff;text-decoration:none}
+.subtitle{max-width:620px;margin:12px auto 0;color:var(--muted);line-height:1.7;font-size:15px}
+.creator{font-weight:700;color:#9ae6b4}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:0 18px 55px rgba(0,0,0,.38),0 0 32px rgba(255,255,255,.035);backdrop-filter:blur(16px);margin-bottom:18px}
+.card-title{font-size:20px;font-weight:800;margin-bottom:9px}.card-subtitle{color:var(--muted);font-size:14px;line-height:1.6;margin:0 0 20px}
+.discord-wrap{text-align:center}.discord-wrap iframe{width:100%;max-width:420px;height:500px;border:0;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.28)}
+.smp-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:16px}.panel{padding:20px;border-radius:17px;background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.09)}
+.panel h3{margin:0 0 8px;font-size:17px}.panel p{margin:0;color:var(--muted);font-size:14px;line-height:1.65}
+.button-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.button{display:inline-flex;align-items:center;justify-content:center;padding:11px 16px;border-radius:11px;color:#fff;text-decoration:none;font-size:14px;font-weight:700;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12);transition:.2s ease}.button:hover{transform:translateY(-2px);background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.23)}.button.primary{background:rgba(255,255,255,.15)}
+.footer{text-align:center;padding:8px 0 4px;color:#969baa;font-size:13px;line-height:1.7}.footer strong{color:#fff}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:700px){body{padding:16px}.card{padding:20px}.smp-grid{grid-template-columns:1fr}.discord-wrap iframe{height:460px}}
 </style>
-
-
 </head>
-
 <body>
-
-
 <main class="container">
-
-<header class="header">
-<div class="logo">
-    <a href="index.html">
-        <img src="IMG_8048.jpg" alt="The Cottage Logo">
-    </a>
-</div>
-
-    <h1>
-        <a href="index.html">The Cottage★</a>
-    </h1>
-
-    <div class="subtitle">
-        A little place to have fun, chill with members and laugh!! -
-        <span class="creator">@gring_gring6</span>
-    </div>
+<header class="hero">
+<a class="logo" href="index.html"><img src="IMG_8048.jpg" alt="The Cottage★ logo"></a>
+<h1><a href="index.html">The Cottage★</a></h1>
+<p class="subtitle">A little place to have fun, chill with members, and laugh!!<br><span class="creator">@gring_gring6</span></p>
 </header>
 
-    <section class="card">
-        <div class="card-title">Come and join us! We're open everytime!</div>
-
-        <iframe
-            src="https://discord.com/widget?id=1398568016915992667&theme=dark"
-            allowtransparency="true"
-            frameborder="0"
-            sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
-        </iframe>
-    </section>
-    
-    <section class="card smp-card">
-        <div class="card-title">The Cottage★ SMP</div>
-
-        <p>
-            The Cottage★ SMP Features & How to Use Them.
-        </p>
-
-        <a href="smp.html" class="smp-button">View The Cottage★ SMP</a>
-    </section>
-    
-<div class="footer">
-    <span class="footer-title">The Cottage★</span>
-    <span>•</span>
-    <span class="maintained">Invite maintained by</span>
-    <span class="credit">@Makkrabb</span>
+<section class="card discord-wrap">
+<div class="card-title">Come hang out with us</div>
+<p class="card-subtitle">Join the Cottage★ community, meet the members, and find everything you need in the Discord.</p>
+<iframe src="https://discord.com/widget?id=1398568016915992667&theme=dark" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" title="The Cottage★ Discord widget"></iframe>
+<div class="button-row" style="justify-content:center">
+<a class="button primary" href="https://discord.com/invite/" target="_blank" rel="noopener">Join the Discord</a>
+<a class="button" href="smp.html">Explore the SMP</a>
 </div>
-    
+</section>
+
+<section class="card">
+<div class="card-title">The Cottage★ SMP</div>
+<p class="card-subtitle">Chapter 1 • Season 5 — a Hardcore survival experience with carefully chosen quality-of-life features.</p>
+<div class="smp-grid">
+<div class="panel"><h3>⛏️ Explore the features</h3><p>See the current Cottage★ feature names, what they do, and how to use the features that have a player-facing tutorial.</p></div>
+<div class="panel"><h3>🏡 Invite-only</h3><p>The SMP is invite-only. Start through the Cottage★ Discord and follow the joining instructions on the SMP page.</p></div>
+</div>
+<div class="button-row"><a class="button primary" href="smp.html">View SMP Features & Info →</a></div>
+</section>
+
+<footer class="footer"><strong>The Cottage★</strong> • Invite maintained by <span class="creator">@Makkrabb</span></footer>
 </main>
-
-
 </body>
 </html>
