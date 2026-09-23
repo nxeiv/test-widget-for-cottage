@@ -1,663 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>The Cottage★ | SMP★</title>
-
-    <link rel="icon" type="image/png" href="IMG_8048-modified.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The Cottage★ SMP — current features, joining information, tutorials, and Code of Conduct.">
+<title>The Cottage★ | SMP★</title>
+<link rel="icon" type="image/png" href="IMG_8048-modified.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    * {
-        box-sizing: border-box;
-    }
-
-    body {
-        margin: 0;
-        min-height: 100vh;
-
-        font-family: "Inter", Arial, sans-serif;
-
-        background:
-            linear-gradient(
-     rgba(10, 11, 16, 0.68),
-     rgba(10, 11, 16, 0.68)
-),
-            url("2C58F125-5521-4799-A848-55533DF42A82.gif");
-
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-
-        color: white;
-        padding: 24px;
-    }
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(12px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-      
-.container {
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
-    animation: fadeUp 0.6s ease-out;
-}
-
-.card {
-    background: rgba(25, 27, 36, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
-    padding: 28px;
-    box-shadow:
-    0 15px 50px rgba(0, 0, 0, 0.35),
-    0 0 30px rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(14px);
-}
-
-.card-title {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 18px;
-    color: #f2f2f2;
-    text-shadow: 0 0 12px rgba(255, 255, 255, 0.12);
-}
-
-    .header {
-    margin-bottom: 28px;
-}
-
-.logo {
-    margin-bottom: 12px;
-}
-
-.logo img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 20px;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.30);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.logo img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(255, 255, 255, 0.50);
-}
-
-h1 a {
-    color: white;
-    text-decoration: none;
-    transition: opacity 0.2s ease;
-}
-
-h1 a:hover {
-    opacity: 0.75;
-}
-
-.subtitle {
-    margin-top: 10px;
-    color: #b9bdc9;
-    font-size: 16px;
-}
-
-.feature h3 {
-    margin: 0 0 7px 0;
-    font-size: 17px;
-    color: #ffffff;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
-}
-
-.feature p {
-    margin: 0;
-    color: #c5c8cf;
-    line-height: 1.6;
-    font-size: 14px;
-    font-weight: 400;
-}
-      
-      .feature-link {
-    color: inherit;
-    text-decoration: none;
-    display: block;
-}
-
-.feature {
-    background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.075),
-    rgba(255, 255, 255, 0.035)
-);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 14px;
-    padding: 16px;
-    margin-bottom: 16px;
-
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease,
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.feature-link:hover .feature {
-    transform: translateY(-3px);
-    background: rgba(255, 255, 255, 0.10);
-    border-color: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.08);
-}
-
-.feature-link:hover .feature h3 {
-    color: #ffffff;
-    text-shadow: 0 0 14px rgba(255, 255, 255, 0.25);
-}
-
-      h1 {
-    font-size: 32px;
-    letter-spacing: -0.5px;
-    margin: 0;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
-}
-
-.back-button {
-    display: inline-block;
-    margin-bottom: 20px;
-    padding: 8px 14px;
-    color: #cfd2d8;
-    background: rgba(255, 255, 255, 0.045);
-    border: 1px solid rgba(255, 255, 255, 0.10);
-    border-radius: 10px;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    transition:
-        color 0.2s ease,
-        background 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease;
-}
-
-.back-button:hover {
-    color: white;
-    background: rgba(255, 255, 255, 0.09);
-    border-color: rgba(255, 255, 255, 0.20);
-    transform: translateX(-3px);
-}
-
-.feature-link:last-child .feature {
-    margin-bottom: 0;
-}
-      
-      .rules-card {
-    margin-top: 20px;
-}
-
-.rules-intro {
-    color: #c5c8cf;
-    line-height: 1.6;
-    font-size: 14px;
-    margin: 0 0 16px 0;
-}
-
-.rules-warning {
-    background: rgba(255, 255, 255, 0.055);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 12px;
-    padding: 14px;
-    margin-bottom: 16px;
-    color: #d5d7dc;
-    font-size: 14px;
-    line-height: 1.6;
-    text-align: left;
-}
-
-.rule {
-    background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.055),
-        rgba(255, 255, 255, 0.025)
-    );
-    border: 1px solid rgba(255, 255, 255, 0.10);
-    border-radius: 14px;
-    padding: 16px;
-    margin-bottom: 14px;
-    text-align: left;
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease;
-}
-
-.rule:hover {
-    background: rgba(255, 255, 255, 0.075);
-    border-color: rgba(255, 255, 255, 0.18);
-    transform: translateY(-2px);
-}
-
-.rule h3 {
-    margin: 0 0 8px 0;
-    font-size: 16px;
-    color: #f5f5f5;
-}
-
-.rule p {
-    margin: 0 0 8px 0;
-    color: #c5c8cf;
-    line-height: 1.6;
-    font-size: 14px;
-}
-
-.punishment {
-    display: block;
-    color: #e0e1e5;
-    font-size: 13px;
-    line-height: 1.5;
-    font-weight: 500;
-}
-
-.rules-ending {
-    margin-top: 22px;
-    padding: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.10);
-    color: #c5c8cf;
-}
-
-.rules-ending h3 {
-    margin: 0 0 8px 0;
-    color: #f5f5f5;
-    font-size: 18px;
-}
-
-.rules-ending p {
-    margin: 6px 0 0 0;
-    line-height: 1.6;
-    font-size: 14px;
-}
-      
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+:root{--text:#fff;--muted:#c5c8cf;--soft:#9fa4b2;--card:rgba(20,22,30,.62);--line:rgba(255,255,255,.1)}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;font-family:"Inter",Arial,sans-serif;color:var(--text);padding:24px;background:linear-gradient(rgba(8,10,15,.72),rgba(8,10,15,.72)),url("2C58F125-5521-4799-A848-55533DF42A82.gif");background-size:cover;background-position:center;background-attachment:fixed}
+.container{width:100%;max-width:960px;margin:0 auto}.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}.back,.nav-link{display:inline-flex;align-items:center;padding:9px 13px;border-radius:10px;color:#d7dae0;text-decoration:none;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);font-size:13px;font-weight:600;transition:.2s ease}.back:hover,.nav-link:hover{color:#fff;background:rgba(255,255,255,.1);transform:translateY(-1px)}
+.hero{text-align:center;padding:10px 0 28px;animation:fadeUp .6s ease-out}.logo img{width:100px;height:100px;object-fit:cover;border-radius:23px;box-shadow:0 0 25px rgba(255,255,255,.2);transition:.25s ease}.logo:hover img{transform:translateY(-3px) scale(1.03)}
+h1{margin:15px 0 0;font-size:clamp(30px,6vw,44px);letter-spacing:-1px}.subtitle{margin:10px auto 0;max-width:650px;color:var(--muted);font-size:15px;line-height:1.7}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:0 18px 55px rgba(0,0,0,.38),0 0 32px rgba(255,255,255,.035);backdrop-filter:blur(16px);margin-bottom:18px}.card-title{font-size:21px;font-weight:800;margin-bottom:7px}.card-subtitle{color:var(--muted);font-size:14px;line-height:1.65;margin:0 0 20px}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.info{padding:18px;border-radius:16px;background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.09)}.info h3{margin:0 0 9px;font-size:15px}.info p{margin:4px 0;color:var(--muted);font-size:13px;line-height:1.6}.code{display:inline-block;margin-top:3px;padding:5px 8px;border-radius:7px;background:rgba(0,0,0,.24);color:#f0f2f5;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;word-break:break-word}
+.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.feature{padding:17px;border-radius:16px;background:linear-gradient(135deg,rgba(255,255,255,.065),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.09);transition:.2s ease}.feature:hover{transform:translateY(-2px);background:rgba(255,255,255,.085);border-color:rgba(255,255,255,.17)}.feature h3{margin:0 0 7px;font-size:16px}.feature p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.6}.tag{display:inline-block;margin-bottom:9px;padding:4px 7px;border-radius:7px;background:rgba(255,255,255,.07);color:#bfc4ce;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.notice{padding:15px 16px;border-radius:14px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1);color:var(--muted);font-size:13.5px;line-height:1.65;margin-bottom:18px}
+.rules .rule{padding:17px 0;border-top:1px solid rgba(255,255,255,.08);text-align:left}.rules .rule:first-of-type{border-top:0}.rule h3{margin:0 0 7px;font-size:15px}.rule p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.65}.punishment{display:block;margin-top:7px;color:#d9dce2;font-size:12.5px;font-weight:600;line-height:1.5}.ending{margin-top:8px;padding:18px;border-radius:14px;background:rgba(255,255,255,.045);color:var(--muted);line-height:1.65;font-size:13.5px}.button-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.button{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:10px;color:#fff;text-decoration:none;font-size:13px;font-weight:700;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.11);transition:.2s ease}.button:hover{transform:translateY(-2px);background:rgba(255,255,255,.15)}
+.footer{text-align:center;padding:8px 0 4px;color:#969baa;font-size:13px;line-height:1.7}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:700px){body{padding:16px}.topbar{align-items:stretch}.info-grid,.feature-grid{grid-template-columns:1fr}.card{padding:20px}}
 </style>
-  
 </head>
-
 <body>
-  
 <main class="container">
+<nav class="topbar"><a class="back" href="index.html">← The Cottage★</a><a class="nav-link" href="#features">Features</a></nav>
 
-<a href="index.html" class="back-button">← Back to The Cottage★</a>
-    
-<header class="header">
-
-    <div class="logo">
-        <a href="index.html">
-            <img src="IMG_8048.jpg" alt="The Cottage Logo">
-        </a>
-    </div>
-
-    <h1>
-        <a href="index.html">The Cottage★ SMP</a>
-    </h1>
-
-    <div class="subtitle">
-        Everything you need to know about The Cottage★ SMP.
-    </div>
-
+<header class="hero">
+<a class="logo" href="index.html"><img src="IMG_8048.jpg" alt="The Cottage★ logo"></a>
+<h1>The Cottage★ SMP</h1>
+<p class="subtitle">Chapter 1 • Season 5<br>Everything you need to know about the current Cottage★ SMP setup.</p>
 </header>
-  
-  <section class="card">
 
-    <div class="card-title">
-        The Cottage★ SMP Features
-    </div>
-
-<a href="https://modrinth.com/plugin/clickvillagers" class="feature-link">
-    <div class="feature">
-        <h3>Click Villagers</h3>
-        <p>
-            Right click and/or crouch to pick up villagers, reset their trades, change their biomes, claim them and much more!
-        </p>
-    </div>
-</a>
-      
-<a href="https://modrinth.com/plugin/griefprevention" class="feature-link">
-    <div class="feature">
-        <h3>GriefPrevention</h3>
-        <p>
-           Run "/claimhelp" on chat for more info.
-            (That's literally it, the tutorial is in the GUI ingame.)
-        </p>
-    </div>
-</a>
-
-<a href="https://modrinth.com/plugin/better-mending-spigot" class="feature-link">
-    <div class="feature">
-        <h3>Better Mending</h3>
-        <p>
-            Crouch + Right click to mend your tools/armors that have mending enchantment on them.
-            (Uses your ingame XP so you NEED to have XP.)
-        </p>
-    </div>
-</a>
-
-<a href="https://modrinth.com/plugin/ultimate-teams" class="feature-link">
-    <div class="feature">
-        <h3>Ultimate Teams</h3>
-        <p>
-            Genuinely js "/team gui" or if you're a miserable fuck like @Ayudalo
-            just use the commands.
-        </p>
-    </div>
-</a>
-      
-<a href="https://modrinth.com/plugin/head-drop" class="feature-link">
-    <div class="feature">
-        <h3>Player Heads Drop</h3>
-        <p>
-            Players can drop their heads when they die, allowing
-            you to collect them as trophies.
-        </p>
-    </div>
-</a>
-
-<a href="https://modrinth.com/plugin/simple-rtp" class="feature-link">
-    <div class="feature">
-        <h3>TPA & RTP</h3>
-        <p>
-            Send a Teleport Request to players, & if you're antisocial, /rtp to randomly teleport to any location at any dimension.
-        </p>
-    </div>
-</a>
-      
-<a href="https://modrinth.com/datapack/veinminer" class="feature-link">
-    <div class="feature">
-        <h3>Veinminer</h3>
-        <p>
-            Veinmines Logs (no stripped logs) & Ores (You can also request to add a block to Veinminer with @Makkrabb)
-        </p>
-    </div>
-</a>
-      
-<a href="https://modrinth.com/plugin/gsit" class="feature-link">
-    <div class="feature">
-        <h3>GSit</h3>
-        <p>
-            "/sit" or Crouch + Right clicking.
-        </p>
-    </div>
-</a>
-    
-    
+<section class="card">
+<div class="card-title">Join the SMP</div>
+<p class="card-subtitle">The Cottage★ SMP is invite-only. Start with the Cottage★ Discord, then use the appropriate Java or Bedrock joining method.</p>
+<div class="info-grid">
+<div class="info"><h3>☕ Java Edition</h3><p>Version: <strong>1.21.8+ • Paper 26.2</strong></p><p>Address: <span class="code">the-cottage-c1-s5.play.hosting</span></p></div>
+<div class="info"><h3>🟩 Bedrock Edition</h3><p>Any version supported by Geyser.</p><p>Friend: <strong>Emmcee4483</strong></p><p>After sending the friend request, players can be invited through their friends list.</p><p>Alternative: <span class="code">62.141.62.31:37731</span></p></div>
+</div>
+<div class="button-row"><a class="button" href="https://the-cottage.onrender.com/" target="_blank" rel="noopener">Cottage★ Website / Discord</a></div>
 </section>
 
-<section class="card rules-card">
-
-    <div class="card-title">
-        📖 The Cottage★ SMP Rules
-    </div>
-
-    <p class="rules-intro">
-        The Cottage★ SMP is a Whitelist-Only server following the Invite-Only
-        policy of The Cottage★ Discord server.
-    </p>
-
-    <div class="rules-warning">
-        ⚠️ <strong>Note:</strong> If you are banned from the Minecraft server,
-        you will most likely also be banned from the Discord server.
-    </div>
-
-    <p class="rules-intro">
-        Please read the Discord rules before playing.
-    </p>
-
-
-    <div class="rule">
-        <h3>1. 🚫 No Griefing</h3>
-        <p>
-            Intentionally destroying, modifying, or damaging another player's
-            builds is prohibited.
-        </p>
-        <span class="punishment">
-            Punishment: Level reset and/or temporary ban depending on severity.
-        </span>
-    </div>
-
-
-    <div class="rule">
-        <h3>2. 💰 No Stealing</h3>
-        <p>
-            Do not take items that belong to another player. Return stolen items
-            when asked.
-        </p>
-        <span class="punishment">
-            Punishment: 3 warnings. Refusing to return stolen items may result
-            in an inventory clear.
-        </span>
-    </div>
-
-
-    <div class="rule">
-        <h3>3. ❌ No X-Ray</h3>
-        <p>
-            X-Ray and similar cheats are strictly prohibited.
-        </p>
-        <span class="punishment">
-            Punishment: Temporary ban, starting at a minimum of 12 hours and
-            increasing depending on severity.
-        </span>
-    </div>
-
-
-    <div class="rule">
-        <h3>4. ⚠️ No Duping</h3>
-        <p>
-            Duplication glitches, exploits, or other methods of duplicating
-            items are strictly prohibited.
-        </p>
-        <span class="punishment">Punishment: Ban.</span>
-    </div>
-
-
-    <div class="rule">
-        <h3>5. 🚷 No Inappropriate Builds</h3>
-        <p>
-            Offensive, explicit, or otherwise inappropriate builds are prohibited.
-        </p>
-        <span class="punishment">
-            Punishment: Temporary ban depending on severity.
-        </span>
-    </div>
-
-
-    <div class="rule">
-        <h3>6. 🛑 No Lag Machines</h3>
-        <p>
-            Intentionally creating lag or excessive server load is prohibited.
-        </p>
-        <span class="punishment">
-            Punishment: Ban depending on severity.
-        </span>
-    </div>
-
-
-    <div class="rule">
-        <h3>7. 🔗 No Malicious or Unauthorized External Links</h3>
-        <p>
-            Malware, phishing, malicious downloads, and other harmful links are
-            prohibited. Ask a moderator before sharing external links.
-        </p>
-        <span class="punishment">Punishment: Ban.</span>
-    </div>
-
-
-    <div class="rule">
-        <h3>8. 🖥️ Cheat Clients Are Prohibited</h3>
-        <p>
-            Cheat clients and other unfair modifications are not allowed.
-            Players suspected of cheating may be investigated by moderators.
-            Refusing to switch to an allowed client when instructed may result
-            in a ban.
-        </p>
-    </div>
-
-
-    <div class="rule">
-        <h3>9. 🚫 No Racial Slurs or Hate Speech</h3>
-        <p>
-            Racial slurs, hate speech, and targeted hateful behavior are
-            prohibited. Treat everyone with respect.
-        </p>
-        <span class="punishment">Punishment: Ban.</span>
-    </div>
-
-
-    <div class="rule">
-        <h3>10. 🐉 Do Not Kill the Ender Dragon</h3>
-        <p>
-            The Ender Dragon is reserved for official server events.
-            Please wait for the community Ender Dragon fight.
-        </p>
-    </div>
-
-
-    <div class="rule">
-        <h3>11. ⚔️ No Gangs</h3>
-        <p>
-            Clans are welcome. Toxic, abusive, or hostile gangs are not.
-        </p>
-    </div>
-
-
-    <div class="rule">
-        <h3>12. 👋 Welcome New Players</h3>
-        <p>
-            Notify the appropriate staff member when a new player joins.
-            Help new players get started and make them feel welcome.
-        </p>
-    </div>
-
-
-    <div class="rule">
-        <h3>13. 🗣️ Respect Server Meetings</h3>
-        <p>
-            Do not fight during official server meetings.
-            PvP may be disabled during meetings.
-        </p>
-    </div>
-
-
-    <div class="rule">
-        <h3>14. ⚔️ No Spawn Killing</h3>
-        <p>
-            Repeatedly killing players at spawn is prohibited.
-            Ask for a duel before engaging in PvP.
-            Unauthorized PvP may result in level penalties.
-        </p>
-    </div>
-
-
-    <div class="rule">
-        <h3>15. 🏳️ Official Clans</h3>
-        <p>
-            Official clans require at least 3 members.
-            Clan wars must be supervised by moderators.
-        </p>
-    </div>
-
-
-    <div class="rule">
-        <h3>16. 🚪 No Combat Logging</h3>
-        <p>
-            Leaving the server during an active duel or combat situation is
-            prohibited.
-        </p>
-        <span class="punishment">
-            Punishment: Timeout or temporary ban depending on severity.
-        </span>
-    </div>
-
-
-    <div class="rule">
-        <h3>17. 🧑‍🌾 Don't Kill Trading Hall Villagers</h3>
-        <p>
-            Villagers in public trading halls are protected.
-        </p>
-        <span class="punishment">
-            Punishment: Ban depending on severity.
-        </span>
-    </div>
-
-
-    <div class="rule">
-        <h3>18. 💬 Keep Chat Appropriate</h3>
-        <p>
-            Public Minecraft chat is logged in the Discord server.
-            Use <strong>/w</strong> or <strong>/msg</strong> for private
-            conversations. Keep conversations respectful and appropriate.
-        </p>
-    </div>
-
-
-    <div class="rule">
-        <h3>19. 🐾 Don't Kill Pets</h3>
-        <p>
-            Named pets are protected. If you accidentally kill someone's pet,
-            inform the owner immediately.
-        </p>
-    </div>
-
-
-    <div class="rule">
-        <h3>20. 👑 No Abuse of Power</h3>
-        <p>
-            Creative permissions and builder roles are given based on trust.
-            Abusing commands, permissions, or other staff privileges is
-            prohibited.
-        </p>
-        <span class="punishment">
-            Punishment: Ban depending on severity.
-        </span>
-    </div>
-
-
-    <div class="rule">
-        <h3>21. 🌱 No Seed Maps or Seed Cracking</h3>
-        <p>
-            Using seed maps, cracked seeds, or tools intended to reveal the
-            world seed is prohibited. Play fairly and explore the world
-            naturally.
-        </p>
-    </div>
-
-
-    <div class="rules-ending">
-        <h3>🏡 Have Fun!</h3>
-        <p>
-            These rules exist to keep The Cottage★ SMP enjoyable, fair, and
-            welcoming for everyone.
-        </p>
-        <p>
-            If you're unsure whether something is allowed, ask a moderator
-            before doing it.
-        </p>
-    </div>
-
+<section class="card" id="features">
+<div class="card-title">The Cottage★ SMP Features</div>
+<p class="card-subtitle">Current public feature names. Click-free, easy-to-scan descriptions with the player-facing tutorial where one is available.</p>
+<div class="feature-grid">
+<div class="feature"><span class="tag">Automatic</span><h3>Open Doors</h3><p>Players can join without owning a premium Minecraft account.</p></div>
+<div class="feature"><span class="tag">Movement</span><h3>Cottage Boost</h3><p>Provides Elytra flight and Spear Lunging.</p><p><strong>Tutorial:</strong> Use an Elytra while using a spear with the Lunge enchantment.</p></div>
+<div class="feature"><span class="tag">Automatic</span><h3>Grand Arrivals</h3><p>Players get special animations when entering the world.</p></div>
+<div class="feature"><span class="tag">Villagers</span><h3>Friendly Neighbors</h3><p>Provides convenient interactions with villagers.</p><p><strong>Tutorial:</strong> Crouch and right-click a villager to place them into your inventory.</p></div>
+<div class="feature"><span class="tag">Customization</span><h3>Cottage Custom</h3><p>Lets players customize and pose armor stands.</p><p><strong>Tutorial:</strong> Use a tripwire hook to configure item displays.</p></div>
+<div class="feature"><span class="tag">Special</span><h3>The Cottage Mace</h3><p>The server's special one-of-a-kind Mace setup.</p></div>
+<div class="feature"><span class="tag">Death</span><h3>Memorial Keepsakes</h3><p>A player's head is left behind when they die as a memorial keepsake.</p></div>
+<div class="feature"><span class="tag">Survival</span><h3>Classic Crafting</h3><p>Netherite is unavailable on the server.</p></div>
+<div class="feature"><span class="tag">Utility</span><h3>Cozy Repairs</h3><p>Provides a more convenient Mending experience.</p><p><strong>Tutorial:</strong> Crouch and right-click a tool with Mending.</p></div>
+<div class="feature"><span class="tag">Protection</span><h3>Cottage Protection</h3><p>Lets players protect their builds and belongings.</p><p><strong>Tutorial:</strong> Hold a golden shovel and use <span class="code">/claimhelp</span> for claim details.</p></div>
+<div class="feature"><span class="tag">Teams</span><h3>Cottage Teams</h3><p>Lets players team up with other players.</p><p><strong>Tutorial:</strong> Create a team with <span class="code">/team create &lt;name&gt;</span>. Use <span class="code">/team</span> for more details.</p></div>
+<div class="feature"><span class="tag">Comfort</span><h3>Cozy Sitting</h3><p>Lets players sit around the world.</p><p><strong>Tutorial:</strong> Use <span class="code">/sit</span> or right-click stairs, slabs, and players. Use <span class="code">/gsit toggle off</span> to disable accidental sitting.</p></div>
+<div class="feature"><span class="tag">Teleport</span><h3>Cottage Teleport</h3><p>Lets players send teleport requests.</p><p><strong>Tutorial:</strong> Use <span class="code">/tpa &lt;player&gt;</span>.</p></div>
+<div class="feature"><span class="tag">Travel</span><h3>Wanderer's Way</h3><p>Lets players travel to a random location.</p></div>
+<div class="feature"><span class="tag">Automatic</span><h3>Lantern Light</h3><p>Held light sources can illuminate the surroundings.</p></div>
+<div class="feature"><span class="tag">Survival</span><h3>Pure Survival</h3><p>Focused on a survival experience.</p></div>
+<div class="feature"><span class="tag">Quality of Life</span><h3>Fresh Vanilla</h3><p>Familiar vanilla gameplay with carefully chosen quality-of-life improvements.</p></div>
+<div class="feature"><span class="tag">Hardcore</span><h3>True Hardcore</h3><p>Keep Inventory is disabled, so death matters on the server.</p></div>
+<div class="feature"><span class="tag">Automatic</span><h3>Steady Stats</h3><p>Player attributes work correctly on the server.</p></div>
+<div class="feature"><span class="tag">Building</span><h3>Cottage Displays</h3><p>Provides decorative displays for builds.</p><p><strong>Tutorial:</strong> Requires the Dream Displays mod on the Java client.</p></div>
+<div class="feature"><span class="tag">Harvesting</span><h3>Cottage Harvest</h3><p>Harvest eligible connected wood and ores while sneaking. Stripped logs are excluded.</p></div>
+<div class="feature"><span class="tag">Voice</span><h3>Cottage Voice</h3><p>Provides proximity voice chat.</p><p><strong>Tutorial:</strong> Java players need the required voice-chat support installed. Bedrock players can use <span class="code">/dvc start</span>.</p></div>
+</div>
 </section>
 
+<section class="card rules">
+<div class="card-title">📖 The Cottage★ SMP Code of Conduct</div>
+<p class="card-subtitle">The current page retains the server's existing Code of Conduct. For the authoritative version, use the official Discord rules link.</p>
+<div class="notice">⚠️ The SMP is invite-only. Please follow both the Discord rules and the SMP Code of Conduct. If you're unsure whether something is allowed, ask a moderator first.</div>
+
+<div class="rule"><h3>1. 🚫 No Griefing</h3><p>Intentionally destroying, modifying, or damaging another player's builds is prohibited.</p><span class="punishment">Punishment / note: Level reset and/or temporary ban depending on severity.</span></div>
+<div class="rule"><h3>2. 💰 No Stealing</h3><p>Do not take items that belong to another player. Return stolen items when asked.</p><span class="punishment">Punishment / note: 3 warnings. Refusing to return stolen items may result in an inventory clear.</span></div>
+<div class="rule"><h3>3. ❌ No X-Ray</h3><p>X-Ray and similar cheats are strictly prohibited.</p><span class="punishment">Punishment / note: Temporary ban, starting at a minimum of 12 hours and increasing depending on severity.</span></div>
+<div class="rule"><h3>4. ⚠️ No Duping</h3><p>Duplication glitches, exploits, or other methods of duplicating items are strictly prohibited.</p><span class="punishment">Punishment / note: Ban.</span></div>
+<div class="rule"><h3>5. 🚷 No Inappropriate Builds</h3><p>Offensive, explicit, or otherwise inappropriate builds are prohibited.</p><span class="punishment">Punishment / note: Temporary ban depending on severity.</span></div>
+<div class="rule"><h3>6. 🛑 No Lag Machines</h3><p>Intentionally creating lag or excessive server load is prohibited.</p><span class="punishment">Punishment / note: Ban depending on severity.</span></div>
+<div class="rule"><h3>7. 🔗 No Malicious or Unauthorized External Links</h3><p>Malware, phishing, malicious downloads, and other harmful links are prohibited. Ask a moderator before sharing external links.</p><span class="punishment">Punishment / note: Ban.</span></div>
+<div class="rule"><h3>8. 🖥️ Cheat Clients Are Prohibited</h3><p>Cheat clients and other unfair modifications are not allowed. Players suspected of cheating may be investigated by moderators.</p><span class="punishment">Punishment / note: Refusing to switch to an allowed client when instructed may result in a ban.</span></div>
+<div class="rule"><h3>9. 🚫 No Racial Slurs or Hate Speech</h3><p>Racial slurs, hate speech, and targeted hateful behavior are prohibited. Treat everyone with respect.</p><span class="punishment">Punishment / note: Ban.</span></div>
+<div class="rule"><h3>10. 🐉 Do Not Kill the Ender Dragon</h3><p>The Ender Dragon is reserved for official server events. Please wait for the community Ender Dragon fight.</p><span class="punishment">Punishment / note: Official event rule.</span></div>
+<div class="rule"><h3>11. ⚔️ No Gangs</h3><p>Clans are welcome. Toxic, abusive, or hostile gangs are not.</p><span class="punishment">Punishment / note: Moderator action as appropriate.</span></div>
+<div class="rule"><h3>12. 👋 Welcome New Players</h3><p>Notify the appropriate staff member when a new player joins. Help new players get started and make them feel welcome.</p><span class="punishment">Punishment / note: Community rule.</span></div>
+<div class="rule"><h3>13. 🗣️ Respect Server Meetings</h3><p>Do not fight during official server meetings. PvP may be disabled during meetings.</p><span class="punishment">Punishment / note: Moderator action as appropriate.</span></div>
+<div class="rule"><h3>14. ⚔️ No Spawn Killing</h3><p>Repeatedly killing players at spawn is prohibited. Ask for a duel before engaging in PvP.</p><span class="punishment">Punishment / note: Unauthorized PvP may result in level penalties.</span></div>
+<div class="rule"><h3>15. 🏳️ Official Clans</h3><p>Official clans require at least 3 members. Clan wars must be supervised by moderators.</p><span class="punishment">Punishment / note: Moderator supervision required.</span></div>
+<div class="rule"><h3>16. 🚪 No Combat Logging</h3><p>Leaving the server during an active duel or combat situation is prohibited.</p><span class="punishment">Punishment / note: Timeout or temporary ban depending on severity.</span></div>
+<div class="rule"><h3>17. 🧑‍🌾 Don't Kill Trading Hall Villagers</h3><p>Villagers in public trading halls are protected.</p><span class="punishment">Punishment / note: Ban depending on severity.</span></div>
+<div class="rule"><h3>18. 💬 Keep Chat Appropriate</h3><p>Public Minecraft chat is logged in the Discord server. Use /w or /msg for private conversations. Keep conversations respectful and appropriate.</p><span class="punishment">Punishment / note: Community moderation as appropriate.</span></div>
+<div class="rule"><h3>19. 🐾 Don't Kill Pets</h3><p>Named pets are protected. If you accidentally kill someone's pet, inform the owner immediately.</p><span class="punishment">Punishment / note: Community moderation as appropriate.</span></div>
+<div class="rule"><h3>20. 👑 No Abuse of Power</h3><p>Creative permissions and builder roles are given based on trust. Abusing commands, permissions, or other staff privileges is prohibited.</p><span class="punishment">Punishment / note: Ban depending on severity.</span></div>
+<div class="rule"><h3>21. 🌱 No Seed Maps or Seed Cracking</h3><p>Using seed maps, cracked seeds, or tools intended to reveal the world seed is prohibited. Play fairly and explore the world naturally.</p><span class="punishment">Punishment / note: Community rule.</span></div>
+
+<div class="ending"><strong>🏡 Have Fun!</strong><br>These rules exist to keep The Cottage★ SMP enjoyable, fair, and welcoming for everyone.</div>
+</section>
+
+<footer class="footer">The Cottage★ • Chapter 1 • Season 5</footer>
 </main>
-  
 </body>
-
 </html>
