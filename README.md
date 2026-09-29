@@ -1,1 +1,1 @@
-# test-widget-for-cottage
+# widget-for-cottage
