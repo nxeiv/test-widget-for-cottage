@@ -30,16 +30,149 @@ h1{margin:0;font-size:clamp(32px,6vw,46px);letter-spacing:-1.2px}h1 a{color:#fff
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:700px){body{padding:16px}.card{padding:20px}.smp-grid{grid-template-columns:1fr}.discord-wrap iframe{height:460px}}
 </style>
+<style>
+/* The Cottage★ motion layer — soft, ambient, and intentionally understated */
+:root{
+  --motion-ease:cubic-bezier(.22,1,.36,1);
+  --motion-duration:.7s;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:-18%;
+  z-index:-3;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 18% 24%, rgba(255,255,255,.10), transparent 28%),
+    radial-gradient(circle at 82% 72%, rgba(180,205,190,.08), transparent 30%);
+  filter:blur(34px);
+  animation:ambientDrift 18s ease-in-out infinite alternate;
+}
+.ambient{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  pointer-events:none;
+  overflow:hidden;
+}
+.ambient span{
+  position:absolute;
+  width:26vw;
+  height:26vw;
+  min-width:180px;
+  min-height:180px;
+  max-width:420px;
+  max-height:420px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(255,255,255,.07), transparent 68%);
+  filter:blur(18px);
+  opacity:.6;
+  animation:floatBlob 16s ease-in-out infinite;
+}
+.ambient span:first-child{top:8%;left:-7%}
+.ambient span:last-child{right:-8%;bottom:4%;animation-delay:-7s;animation-duration:20s}
+.scroll-progress{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:2px;
+  z-index:1000;
+  pointer-events:none;
+  background:transparent;
+}
+.scroll-progress span{
+  display:block;
+  width:0;
+  height:100%;
+  background:rgba(255,255,255,.72);
+  box-shadow:0 0 10px rgba(255,255,255,.28);
+  transform-origin:left center;
+}
+.js-ready .motion{
+  opacity:0;
+  transform:translateY(18px);
+  transition:
+    opacity var(--motion-duration) var(--motion-ease),
+    transform var(--motion-duration) var(--motion-ease);
+  transition-delay:var(--delay,0ms);
+}
+.js-ready .motion.is-visible{
+  opacity:1;
+  transform:none;
+}
+.js-ready .motion-scale{
+  opacity:0;
+  transform:scale(.985) translateY(10px);
+  transition:
+    opacity .8s var(--motion-ease),
+    transform .8s var(--motion-ease);
+}
+.js-ready .motion-scale.is-visible{opacity:1;transform:none}
+.logo img{
+  animation:logoFloat 5s ease-in-out infinite;
+}
+.logo:hover img{
+  animation-play-state:paused;
+}
+.button{
+  position:relative;
+  overflow:hidden;
+}
+.button::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-120%;
+  width:72%;
+  height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.16),transparent);
+  transform:skewX(-18deg);
+  transition:left .55s ease;
+  pointer-events:none;
+}
+.button:hover::after{left:145%}
+.card:hover{
+  transform:translateY(-2px);
+  transition:transform .35s var(--motion-ease), box-shadow .35s var(--motion-ease);
+}
+@keyframes ambientDrift{
+  0%{transform:translate3d(-1%,0,0) scale(1)}
+  100%{transform:translate3d(1.5%,-1%,0) scale(1.04)}
+}
+@keyframes floatBlob{
+  0%,100%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(18px,-12px,0) scale(1.08)}
+}
+@keyframes logoFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-4px)}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+  .js-ready .motion,.js-ready .motion-scale{
+    opacity:1;
+    transform:none;
+  }
+}
+</style>
 </head>
 <body>
+<div class="ambient" aria-hidden="true"><span></span><span></span></div>
+<div class="scroll-progress" aria-hidden="true"><span></span></div>
 <main class="container">
-<header class="hero">
+<header class="hero motion" style="--delay:90ms">
 <a class="logo" href="index.html"><img src="IMG_8048.jpg" alt="The Cottage★ logo"></a>
 <h1><a href="index.html">The Cottage★</a></h1>
 <p class="subtitle">A little place to have fun, chill with members, and laugh!!<br><span class="creator">@gring_gring6</span></p>
 </header>
 
-<section class="card discord-wrap">
+<section class="card discord-wrap motion-scale" style="--delay:180ms">
 <div class="card-title">Come hang out with us</div>
 <p class="card-subtitle">Join the Cottage★ community, meet the members, and find everything you need in the Discord.</p>
 <iframe src="https://discord.com/widget?id=1398568016915992667&theme=dark" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" title="The Cottage★ Discord widget"></iframe>
@@ -49,17 +182,57 @@ h1{margin:0;font-size:clamp(32px,6vw,46px);letter-spacing:-1.2px}h1 a{color:#fff
 </div>
 </section>
 
-<section class="card">
+<section class="card motion-scale" style="--delay:270ms">
 <div class="card-title">The Cottage★ SMP</div>
 <p class="card-subtitle">Chapter 1 • Season 5 — a Hardcore survival experience with carefully chosen quality-of-life features.</p>
 <div class="smp-grid">
-<div class="panel"><h3>◇ Explore the features</h3><p>See the current Cottage★ feature names, what they do, and how to use the features that have a player-facing tutorial.</p></div>
-<div class="panel"><h3>⌂ Invite-only</h3><p>The SMP is invite-only. Visit the Cottage★ Discord for community information and updates.</p></div>
+<div class="panel motion" style="--delay:150ms"><h3>◇ Explore the features</h3><p>See the current Cottage★ feature names, what they do, and how to use the features that have a player-facing tutorial.</p></div>
+<div class="panel motion" style="--delay:150ms"><h3>⌂ Invite-only</h3><p>The SMP is invite-only. Visit the Cottage★ Discord for community information and updates.</p></div>
 </div>
 <div class="button-row"><a class="button primary" href="smp.html">View SMP Features & Info →</a></div>
 </section>
 
-<footer class="footer"><strong>The Cottage★</strong> • Invite maintained by <span class="creator">@Makkrabb</span></footer>
+<footer class="footer motion" style="--delay:360ms"><strong>The Cottage★</strong> • Invite maintained by <span class="creator">@Makkrabb</span></footer>
 </main>
+<script>
+(() => {
+  document.body.classList.add("js-ready");
+
+  const progress = document.querySelector(".scroll-progress span");
+  const updateProgress = () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const ratio = max > 0 ? window.scrollY / max : 0;
+    if (progress) progress.style.width = (ratio * 100) + "%";
+  };
+  updateProgress();
+  window.addEventListener("scroll", updateProgress, { passive: true });
+
+  const items = document.querySelectorAll(".motion, .motion-scale");
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -5% 0px" });
+    items.forEach((item) => observer.observe(item));
+  } else {
+    items.forEach((item) => item.classList.add("is-visible"));
+  }
+
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const ambient = document.querySelector(".ambient");
+    if (ambient) {
+      window.addEventListener("pointermove", (event) => {
+        const x = (event.clientX / window.innerWidth - 0.5) * 10;
+        const y = (event.clientY / window.innerHeight - 0.5) * 10;
+        ambient.style.transform = `translate3d(${x}px,${y}px,0)`;
+      }, { passive: true });
+    }
+  }
+})();
+</script>
 </body>
 </html>
