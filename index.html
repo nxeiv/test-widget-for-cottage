@@ -1,238 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="The Cottage★ — a friendly Discord community and The Cottage★ SMP.">
-<title>The Cottage★ | Discord★</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The Cottage★ — an invite-only community of online friends.">
+<meta name="theme-color" content="#efe7d7">
+<meta property="og:title" content="The Cottage★"><meta property="og:description" content="A little corner of the internet for friends."><meta property="og:image" content="IMG_8048-modified.png">
+<title>The Cottage★ — A Little Corner of the Internet</title>
 <link rel="icon" type="image/png" href="IMG_8048-modified.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-*{box-sizing:border-box}
-:root{--text:#fff;--muted:#c5c8cf;--soft:#9fa4b2;--card:rgba(20,22,30,.62);--line:rgba(255,255,255,.1)}
-html{scroll-behavior:smooth}
-body{margin:0;min-height:100vh;font-family:"Inter",Arial,sans-serif;color:var(--text);padding:24px;background:linear-gradient(rgba(8,10,15,.72),rgba(8,10,15,.72)),url("2C58F125-5521-4799-A848-55533DF42A82.gif");background-size:cover;background-position:center;background-attachment:fixed}
-.container{width:100%;max-width:960px;margin:0 auto}
-.hero{text-align:center;padding:22px 0 30px;animation:fadeUp .6s ease-out}
-.logo{display:inline-block;margin-bottom:16px}.logo img{width:104px;height:104px;object-fit:cover;border-radius:24px;box-shadow:0 0 26px rgba(255,255,255,.22);transition:.25s ease}.logo:hover img{transform:translateY(-3px) scale(1.03);box-shadow:0 0 34px rgba(255,255,255,.34)}
-h1{margin:0;font-size:clamp(32px,6vw,46px);letter-spacing:-1.2px}h1 a{color:#fff;text-decoration:none}
-.subtitle{max-width:620px;margin:12px auto 0;color:var(--muted);line-height:1.7;font-size:15px}
-.creator{font-weight:700;color:#9ae6b4}
-.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:0 18px 55px rgba(0,0,0,.38),0 0 32px rgba(255,255,255,.035);backdrop-filter:blur(16px);margin-bottom:18px}
-.card-title{font-size:20px;font-weight:800;margin-bottom:9px}.card-subtitle{color:var(--muted);font-size:14px;line-height:1.6;margin:0 0 20px}
-.discord-wrap{text-align:center}.discord-wrap iframe{width:100%;max-width:420px;height:500px;border:0;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.28)}
-.smp-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:16px}.panel{padding:20px;border-radius:17px;background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.09)}
-.panel h3{margin:0 0 8px;font-size:17px}.panel p{margin:0;color:var(--muted);font-size:14px;line-height:1.65}
-.button-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.button{display:inline-flex;align-items:center;justify-content:center;padding:11px 16px;border-radius:11px;color:#fff;text-decoration:none;font-size:14px;font-weight:700;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12);transition:.2s ease}.button:hover{transform:translateY(-2px);background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.23)}.button.primary{background:rgba(255,255,255,.15)}
-.footer{text-align:center;padding:8px 0 4px;color:#969baa;font-size:13px;line-height:1.7}.footer strong{color:#fff}.footer .creator{color:#8fd7ff}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:700px){body{padding:16px}.card{padding:20px}.smp-grid{grid-template-columns:1fr}.discord-wrap iframe{height:460px}}
-</style>
-<style>
-/* The Cottage★ motion layer — soft, ambient, and intentionally understated */
-:root{
-  --motion-ease:cubic-bezier(.22,1,.36,1);
-  --motion-duration:.7s;
-}
-body::before{
-  content:"";
-  position:fixed;
-  inset:-18%;
-  z-index:-3;
-  pointer-events:none;
-  background:
-    radial-gradient(circle at 18% 24%, rgba(255,255,255,.10), transparent 28%),
-    radial-gradient(circle at 82% 72%, rgba(180,205,190,.08), transparent 30%);
-  filter:blur(34px);
-  animation:ambientDrift 18s ease-in-out infinite alternate;
-}
-.ambient{
-  position:fixed;
-  inset:0;
-  z-index:-2;
-  pointer-events:none;
-  overflow:hidden;
-}
-.ambient span{
-  position:absolute;
-  width:26vw;
-  height:26vw;
-  min-width:180px;
-  min-height:180px;
-  max-width:420px;
-  max-height:420px;
-  border-radius:50%;
-  background:radial-gradient(circle, rgba(255,255,255,.07), transparent 68%);
-  filter:blur(18px);
-  opacity:.6;
-  animation:floatBlob 16s ease-in-out infinite;
-}
-.ambient span:first-child{top:8%;left:-7%}
-.ambient span:last-child{right:-8%;bottom:4%;animation-delay:-7s;animation-duration:20s}
-.scroll-progress{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:2px;
-  z-index:1000;
-  pointer-events:none;
-  background:transparent;
-}
-.scroll-progress span{
-  display:block;
-  width:0;
-  height:100%;
-  background:rgba(255,255,255,.72);
-  box-shadow:0 0 10px rgba(255,255,255,.28);
-  transform-origin:left center;
-}
-.js-ready .motion{
-  opacity:0;
-  transform:translateY(18px);
-  transition:
-    opacity var(--motion-duration) var(--motion-ease),
-    transform var(--motion-duration) var(--motion-ease);
-  transition-delay:var(--delay,0ms);
-}
-.js-ready .motion.is-visible{
-  opacity:1;
-  transform:none;
-}
-.js-ready .motion-scale{
-  opacity:0;
-  transform:scale(.985) translateY(10px);
-  transition:
-    opacity .8s var(--motion-ease),
-    transform .8s var(--motion-ease);
-}
-.js-ready .motion-scale.is-visible{opacity:1;transform:none}
-.logo img{
-  animation:logoFloat 5s ease-in-out infinite;
-}
-.logo:hover img{
-  animation-play-state:paused;
-}
-.button{
-  position:relative;
-  overflow:hidden;
-}
-.button::after{
-  content:"";
-  position:absolute;
-  top:0;
-  left:-120%;
-  width:72%;
-  height:100%;
-  background:linear-gradient(100deg,transparent,rgba(255,255,255,.16),transparent);
-  transform:skewX(-18deg);
-  transition:left .55s ease;
-  pointer-events:none;
-}
-.button:hover::after{left:145%}
-.card:hover{
-  transform:translateY(-2px);
-  transition:transform .35s var(--motion-ease), box-shadow .35s var(--motion-ease);
-}
-@keyframes ambientDrift{
-  0%{transform:translate3d(-1%,0,0) scale(1)}
-  100%{transform:translate3d(1.5%,-1%,0) scale(1.04)}
-}
-@keyframes floatBlob{
-  0%,100%{transform:translate3d(0,0,0) scale(1)}
-  50%{transform:translate3d(18px,-12px,0) scale(1.08)}
-}
-@keyframes logoFloat{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-4px)}
-}
-@media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  *,*::before,*::after{
-    animation-duration:.01ms !important;
-    animation-iteration-count:1 !important;
-    transition-duration:.01ms !important;
-  }
-  .js-ready .motion,.js-ready .motion-scale{
-    opacity:1;
-    transform:none;
-  }
-}
-</style>
+<link rel="stylesheet" href="cottage.css">
 </head>
 <body>
-<div class="ambient" aria-hidden="true"><span></span><span></span></div>
-<div class="scroll-progress" aria-hidden="true"><span></span></div>
-<main class="container">
-<header class="hero motion" style="--delay:90ms">
-<a class="logo" href="index.html"><img src="IMG_8048.jpg" alt="The Cottage★ logo"></a>
-<h1><a href="index.html">The Cottage★</a></h1>
-<p class="subtitle">A little place to have fun, chill with members, and laugh!!<br><span class="creator">@gring_gring6</span></p>
-</header>
-
-<section class="card discord-wrap motion-scale" style="--delay:180ms">
-<div class="card-title">Come hang out with us</div>
-<p class="card-subtitle">Join the Cottage★ community, meet the members, and find everything you need in the Discord.</p>
-<iframe src="https://discord.com/widget?id=1398568016915992667&theme=dark" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" title="The Cottage★ Discord widget"></iframe>
-<div class="button-row" style="justify-content:center">
-<a class="button primary" href="https://the-cottage.onrender.com/" target="_blank" rel="noopener">Join the Discord</a>
-<a class="button" href="smp.html">Explore the SMP</a>
-</div>
-</section>
-
-<section class="card motion-scale" style="--delay:270ms">
-<div class="card-title">The Cottage★ SMP</div>
-<p class="card-subtitle">Chapter 1 • Season 5 — a Hardcore survival experience with carefully chosen quality-of-life features.</p>
-<div class="smp-grid">
-<div class="panel motion" style="--delay:150ms"><h3>◇ Explore the features</h3><p>See the current Cottage★ feature names, what they do, and how to use the features that have a player-facing tutorial.</p></div>
-<div class="panel motion" style="--delay:150ms"><h3>⌂ Invite-only</h3><p>The SMP is invite-only. Visit the Cottage★ Discord for community information and updates.</p></div>
-</div>
-<div class="button-row"><a class="button primary" href="smp.html">View SMP Features & Info →</a></div>
-</section>
-
-<footer class="footer motion" style="--delay:360ms"><strong>The Cottage★</strong> • Invite maintained by <span class="creator">@Makkrabb</span></footer>
-</main>
-<script>
-(() => {
-  document.body.classList.add("js-ready");
-
-  const progress = document.querySelector(".scroll-progress span");
-  const updateProgress = () => {
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    const ratio = max > 0 ? window.scrollY / max : 0;
-    if (progress) progress.style.width = (ratio * 100) + "%";
-  };
-  updateProgress();
-  window.addEventListener("scroll", updateProgress, { passive: true });
-
-  const items = document.querySelectorAll(".motion, .motion-scale");
-  if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: "0px 0px -5% 0px" });
-    items.forEach((item) => observer.observe(item));
-  } else {
-    items.forEach((item) => item.classList.add("is-visible"));
-  }
-
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    const ambient = document.querySelector(".ambient");
-    if (ambient) {
-      window.addEventListener("pointermove", (event) => {
-        const x = (event.clientX / window.innerWidth - 0.5) * 10;
-        const y = (event.clientY / window.innerHeight - 0.5) * 10;
-        ambient.style.transform = `translate3d(${x}px,${y}px,0)`;
-      }, { passive: true });
-    }
-  }
-})();
-</script>
-</body>
-</html>
+<div class="page-bg" aria-hidden="true"></div><div class="orb-layer" aria-hidden="true"><div class="orb one"></div><div class="orb two"></div><div class="orb three"></div></div><div class="cursor-glow" aria-hidden="true"></div><div class="progress" aria-hidden="true"><span></span></div>
+<div class="shell">
+<nav class="topnav reveal" style="--delay:40ms"><a class="brand-mini" href="index.html"><img src="IMG_8048-modified.png" alt=""><span>The Cottage★</span></a><div class="navlinks"><a href="#about">About</a><a href="#life">Life</a><a href="#smp">SMP</a><a href="#join" class="nav-pill">Join the Discord</a></div></nav>
+<header class="hero"><div class="hero-inner">
+<div class="hero-kicker reveal" style="--delay:100ms">Invite-only community</div>
+<div class="hero-logo reveal" style="--delay:160ms"><img src="IMG_8048.jpg" alt="The Cottage★ logo"></div>
+<h1 class="reveal" style="--delay:220ms"><span>The Cottage★</span></h1>
+<p class="hero-copy reveal" style="--delay:280ms">A little corner of the internet for friends.<br>A private community where people from different places come together to <strong>talk, hang out, play, and make memories.</strong></p>
+<div class="hero-actions reveal" style="--delay:360ms"><a class="btn primary" href="https://the-cottage.onrender.com/" target="_blank" rel="noopener">Come inside <span class="arrow">→</span></a><a class="btn secondary" href="#about">Get to know the Cottage</a></div>
+<p class="hero-note reveal" style="--delay:430ms">The Cottage★ is the home. The SMP is the backyard.</p>
+</div></header>
+<section class="section" id="about"><div class="section-head reveal"><div><div class="eyebrow">The home</div><h2>What is The Cottage★?</h2></div><p class="section-intro">Not a public server. Not a numbers game. Just a private corner of the internet built around the people who are here.</p></div>
+<div class="paper story-card reveal" data-tilt style="--delay:120ms"><div class="story-grid"><div class="story-copy"><p>The Cottage★ is primarily a friend group — an invite-only Discord community made up of people from different backgrounds, places, and parts of life.</p><p>We talk, call, share random things, play games, disappear for a while, come back, and generally spend time together. There isn't one activity you need to care about to belong here.</p><p>Someone can be a huge part of The Cottage★ without ever opening Minecraft.</p></div><div class="pullquote"><strong>A place for the people first.<br>Everything else grows from that.</strong></div></div></div></section>
+<section class="section" id="life"><div class="section-head reveal"><div><div class="eyebrow">Daily life</div><h2>What do we actually do?</h2></div><p class="section-intro">Nothing here is mandatory. The fun comes from having people around, not from checking boxes.</p></div>
+<div class="activity-grid">
+<article class="activity reveal" data-tilt style="--delay:40ms"><div class="activity-icon">Aa</div><h3>Talk</h3><p>Random conversations, serious conversations, memes, updates, and the occasional “why are we still awake?” moment.</p></article>
+<article class="activity reveal" data-tilt style="--delay:100ms"><div class="activity-icon">◌</div><h3>Hang out</h3><p>Calls, quiet company, shared time, and being around people even when nobody has anything particularly important to say.</p></article>
+<article class="activity reveal" data-tilt style="--delay:160ms"><div class="activity-icon">✦</div><h3>Play</h3><p>Minecraft is one of the things we do together, alongside whatever other games or activities happen to stick.</p></article>
+<article class="activity reveal" data-tilt style="--delay:220ms"><div class="activity-icon">♡</div><h3>Make memories</h3><p>Inside jokes, screenshots, projects, events, stories, and all the small moments that slowly become part of the group.</p></article>
+</div></section>
+<section class="section backyard" id="smp"><div class="backyard-card reveal" data-parallax=".025"><div class="backyard-content"><div class="backyard-badge">The backyard · Chapter 1 • Season 5</div><h2>The Cottage★ SMP</h2><p>A shared Minecraft world created for members who want somewhere to play together. Hardcore survival, quality-of-life features, Java + Bedrock support, and a lot of room to make our own little stories.</p><div class="hero-actions" style="justify-content:flex-start"><a class="btn secondary" href="smp.html">Explore the backyard <span class="arrow">→</span></a></div></div></div></section>
+<section class="section" id="join"><div class="paper invite-card reveal"><div class="invite-copy"><div class="eyebrow">Come hang out</div><h2>The door is open.</h2><p>The Cottage★ is invite-only, with Discord as the main home for the community. Minecraft is just one of the rooms you can wander into.</p><div class="hero-actions" style="justify-content:flex-start"><a class="btn primary" href="https://the-cottage.onrender.com/" target="_blank" rel="noopener">Join the Discord <span class="arrow">→</span></a></div></div><div class="widget-frame"><iframe src="https://discord.com/widget?id=1398568016915992667&theme=dark" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" title="The Cottage★ Discord widget"></iframe></div></div></section>
+<footer class="footer">The Cottage★ · A little corner of the internet for friends.</footer>
+</div><script src="cottage.js"></script>
+</body></html>
