@@ -1,171 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="The Cottage★ SMP — current features, joining information, tutorials, and Code of Conduct.">
-<title>The Cottage★ | SMP★</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The Cottage★ SMP — the shared backyard of The Cottage★ community.">
+<meta name="theme-color" content="#efe7d7">
+<meta property="og:title" content="The Cottage★ SMP"><meta property="og:description" content="The shared Minecraft backyard of The Cottage★ community."><meta property="og:image" content="IMG_8048-modified.png">
+<title>The Cottage★ SMP — The Backyard</title>
 <link rel="icon" type="image/png" href="IMG_8048-modified.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-*{box-sizing:border-box}
-:root{--text:#fff;--muted:#c5c8cf;--soft:#9fa4b2;--card:rgba(20,22,30,.62);--line:rgba(255,255,255,.1)}
-html{scroll-behavior:smooth}
-body{margin:0;min-height:100vh;font-family:"Inter",Arial,sans-serif;color:var(--text);padding:24px;background:linear-gradient(rgba(8,10,15,.72),rgba(8,10,15,.72)),url("2C58F125-5521-4799-A848-55533DF42A82.gif");background-size:cover;background-position:center;background-attachment:fixed}
-.container{width:100%;max-width:960px;margin:0 auto}.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}.back,.nav-link{display:inline-flex;align-items:center;padding:9px 13px;border-radius:10px;color:#d7dae0;text-decoration:none;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);font-size:13px;font-weight:600;transition:.2s ease}.back:hover,.nav-link:hover{color:#fff;background:rgba(255,255,255,.1);transform:translateY(-1px)}
-.hero{text-align:center;padding:10px 0 28px;animation:fadeUp .6s ease-out}.logo img{width:100px;height:100px;object-fit:cover;border-radius:23px;box-shadow:0 0 25px rgba(255,255,255,.2);transition:.25s ease}.logo:hover img{transform:translateY(-3px) scale(1.03)}
-h1{margin:15px 0 0;font-size:clamp(30px,6vw,44px);letter-spacing:-1px}.subtitle{margin:10px auto 0;max-width:650px;color:var(--muted);font-size:15px;line-height:1.7}
-.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:0 18px 55px rgba(0,0,0,.38),0 0 32px rgba(255,255,255,.035);backdrop-filter:blur(16px);margin-bottom:18px}.card-title{font-size:21px;font-weight:800;margin-bottom:7px}.card-subtitle{color:var(--muted);font-size:14px;line-height:1.65;margin:0 0 20px}
-.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.info{padding:18px;border-radius:16px;background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.09)}.info h3{margin:0 0 9px;font-size:15px}.info p{margin:4px 0;color:var(--muted);font-size:13px;line-height:1.6}.code{display:inline-block;margin-top:3px;padding:5px 8px;border-radius:7px;background:rgba(0,0,0,.24);color:#f0f2f5;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;word-break:break-word}
-.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.feature{padding:17px;border-radius:16px;background:linear-gradient(135deg,rgba(255,255,255,.065),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.09);transition:.2s ease}.feature:hover{transform:translateY(-2px);background:rgba(255,255,255,.085);border-color:rgba(255,255,255,.17)}.feature h3{margin:0 0 7px;font-size:16px}.feature p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.6}.tag{display:inline-block;margin-bottom:9px;padding:4px 7px;border-radius:7px;background:rgba(255,255,255,.07);color:#bfc4ce;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
-.notice{padding:15px 16px;border-radius:14px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1);color:var(--muted);font-size:13.5px;line-height:1.65;margin-bottom:18px}
-.rules .rule{padding:17px 0;border-top:1px solid rgba(255,255,255,.08);text-align:left}.rules .rule:first-of-type{border-top:0}.rule h3{margin:0 0 7px;font-size:15px}.rule p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.65}.punishment{display:block;margin-top:7px;color:#d9dce2;font-size:12.5px;font-weight:600;line-height:1.5}.ending{margin-top:8px;padding:18px;border-radius:14px;background:rgba(255,255,255,.045);color:var(--muted);line-height:1.65;font-size:13.5px}.button-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.button{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:10px;color:#fff;text-decoration:none;font-size:13px;font-weight:700;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.11);transition:.2s ease}.button:hover{transform:translateY(-2px);background:rgba(255,255,255,.15)}
-.footer{text-align:center;padding:8px 0 4px;color:#969baa;font-size:13px;line-height:1.7}.footer .creator{color:#8fd7ff}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:700px){body{padding:16px}.topbar{align-items:stretch}.info-grid,.feature-grid{grid-template-columns:1fr}.card{padding:20px}}
-</style>
-<style>
-/* The Cottage★ motion layer — soft, ambient, and intentionally understated */
-:root{--motion-ease:cubic-bezier(.22,1,.36,1);--motion-duration:.7s}
-body::before{
-  content:"";position:fixed;inset:-18%;z-index:-3;pointer-events:none;
-  background:radial-gradient(circle at 18% 24%,rgba(255,255,255,.10),transparent 28%),radial-gradient(circle at 82% 72%,rgba(180,205,190,.08),transparent 30%);
-  filter:blur(34px);animation:ambientDrift 18s ease-in-out infinite alternate;
-}
-.ambient{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden}
-.ambient span{
-  position:absolute;width:26vw;height:26vw;min-width:180px;min-height:180px;max-width:420px;max-height:420px;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,255,255,.07),transparent 68%);filter:blur(18px);opacity:.6;animation:floatBlob 16s ease-in-out infinite;
-}
-.ambient span:first-child{top:8%;left:-7%}.ambient span:last-child{right:-8%;bottom:4%;animation-delay:-7s;animation-duration:20s}
-.scroll-progress{position:fixed;top:0;left:0;width:100%;height:2px;z-index:1000;pointer-events:none}
-.scroll-progress span{display:block;width:0;height:100%;background:rgba(255,255,255,.72);box-shadow:0 0 10px rgba(255,255,255,.28);transform-origin:left center}
-.js-ready .motion{opacity:0;transform:translateY(18px);transition:opacity var(--motion-duration) var(--motion-ease),transform var(--motion-duration) var(--motion-ease);transition-delay:var(--delay,0ms)}
-.js-ready .motion.is-visible{opacity:1;transform:none}
-.js-ready .motion-scale{opacity:0;transform:scale(.985) translateY(10px);transition:opacity .8s var(--motion-ease),transform .8s var(--motion-ease)}
-.js-ready .motion-scale.is-visible{opacity:1;transform:none}
-.logo img{animation:logoFloat 5s ease-in-out infinite}.logo:hover img{animation-play-state:paused}
-.button{position:relative;overflow:hidden}
-.button::after{content:"";position:absolute;top:0;left:-120%;width:72%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.16),transparent);transform:skewX(-18deg);transition:left .55s ease;pointer-events:none}
-.button:hover::after{left:145%}
-.card:hover{transform:translateY(-2px);transition:transform .35s var(--motion-ease),box-shadow .35s var(--motion-ease)}
-@keyframes ambientDrift{0%{transform:translate3d(-1%,0,0) scale(1)}100%{transform:translate3d(1.5%,-1%,0) scale(1.04)}}
-@keyframes floatBlob{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(18px,-12px,0) scale(1.08)}}
-@keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-@media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
-  .js-ready .motion,.js-ready .motion-scale{opacity:1;transform:none}
-}
-</style>
+<link rel="stylesheet" href="cottage.css">
 </head>
 <body>
-<div class="ambient" aria-hidden="true"><span></span><span></span></div>\n<div class="scroll-progress" aria-hidden="true"><span></span></div>
-<main class="container">
-<nav class="topbar motion" style="--delay:40ms"><a class="back" href="index.html">← The Cottage★</a><a class="nav-link" href="#features">Features</a></nav>
-
-<header class="hero motion" style="--delay:100ms">
-<a class="logo" href="index.html"><img src="IMG_8048.jpg" alt="The Cottage★ logo"></a>
-<h1>The Cottage★ SMP</h1>
-<p class="subtitle">Chapter 1 • Season 5<br>Everything you need to know about the current Cottage★ SMP setup.</p>
-</header>
-
-<section class="card">
-<div class="card-title">About the SMP</div>
-<div class="info-grid">
-<div class="info motion" style="--delay:160ms"><h3>◇ Hardcore Survival</h3><p>Chapter 1 • Season 5 with a survival-focused experience and carefully chosen quality-of-life features.</p></div>
-<div class="info motion" style="--delay:160ms"><h3>⌂ Private Community</h3><p>Access is managed through The Cottage★ community rather than through public server connection details.</p></div>
-</div>
-<div class="button-row"><a class="button" href="https://the-cottage.onrender.com/">Cottage★ Website / Discord</a></div>
-</section>
-
-<section class="card motion-scale" id="features" style="--delay:240ms">
-<div class="card-title">The Cottage★ SMP Features</div>
-<p class="card-subtitle">Current public feature names. Click-free, easy-to-scan descriptions with the player-facing tutorial where one is available.</p>
-<div class="feature-grid">
-<div class="feature motion" style="--delay:120ms"><span class="tag">Automatic</span><h3>Open Doors</h3><p>Players can join without owning a premium Minecraft account.</p></div>
-<div class="feature motion" style="--delay:120ms"><span class="tag">Movement</span><h3>Cottage Boost</h3><p>Provides Elytra flight and Spear Lunging.</p><p><strong>Tutorial:</strong> Use an Elytra while using a spear with the Lunge enchantment.</p></div>
-<div class="feature motion" style="--delay:120ms"><span class="tag">Automatic</span><h3>Grand Arrivals</h3><p>Players get special animations when entering the world.</p></div>
-<div class="feature motion" style="--delay:120ms"><span class="tag">Villagers</span><h3>Friendly Neighbors</h3><p>Provides convenient interactions with villagers.</p><p><strong>Tutorial:</strong> Crouch and right-click a villager to place them into your inventory.</p></div>
-<div class="feature motion" style="--delay:120ms"><span class="tag">Customization</span><h3>Cottage Custom</h3><p>Lets players customize and pose armor stands.</p><p><strong>Tutorial:</strong> Use a tripwire hook to configure item displays.</p></div>
-<div class="feature motion" style="--delay:120ms"><span class="tag">Special</span><h3>The Cottage Mace</h3><p>The server's special one-of-a-kind Mace setup.</p></div>
-<div class="feature motion" style="--delay:120ms"><span class="tag">Death</span><h3>Memorial Keepsakes</h3><p>A player's head is left behind when they die as a memorial keepsake.</p></div>
-<div class="feature motion" style="--delay:120ms"><span class="tag">Survival</span><h3>Classic Crafting</h3><p>Netherite is unavailable on the server.</p></div>
-<div class="feature motion" style="--delay:120ms"><span class="tag">Utility</span><h3>Cozy Repairs</h3><p>Provides a more convenient Mending experience.</p><p><strong>Tutorial:</strong> Crouch and right-click a tool with Mending.</p></div>
-<div class="feature motion" style="--delay:120ms"><span class="tag">Protection</span><h3>Cottage Protection</h3><p>Lets players protect their builds and belongings.</p><p><strong>Tutorial:</strong> Hold a golden shovel and use <span class="code">/claimhelp</span> for claim details.</p></div>
-<div class="feature motion" style="--delay:120ms"><span class="tag">Teams</span><h3>Cottage Teams</h3><p>Lets players team up with other players.</p><p><strong>Tutorial:</strong> Create a team with <span class="code">/team create &lt;name&gt;</span>. Use <span class="code">/team</span> for more details.</p></div>
-<div class="feature motion" style="--delay:120ms"><span class="tag">Comfort</span><h3>Cozy Sitting</h3><p>Lets players sit around the world.</p><p><strong>Tutorial:</strong> Use <span class="code">/sit</span> or right-click stairs, slabs, and players. Use <span class="code">/gsit toggle off</span> to disable accidental sitting.</p></div>
-<div class="feature motion" style="--delay:120ms"><span class="tag">Teleport</span><h3>Cottage Teleport</h3><p>Lets players send teleport requests.</p><p><strong>Tutorial:</strong> Use <span class="code">/tpa &lt;player&gt;</span>.</p></div>
-<div class="feature motion" style="--delay:120ms"><span class="tag">Travel</span><h3>Wanderer's Way</h3><p>Type <span class="code">/rtp</span> in chat to teleport in a random location.</p></div>
-<div class="feature motion" style="--delay:120ms"><span class="tag">Automatic</span><h3>Lantern Light</h3><p>Held light sources can illuminate the surroundings.</p></div>
-<div class="feature motion" style="--delay:120ms"><span class="tag">Quality of Life</span><h3>Fresh Vanilla</h3><p>Familiar vanilla gameplay with carefully chosen quality-of-life improvements.</p></div>
-<div class="feature motion" style="--delay:120ms"><span class="tag">Hardcore</span><h3>True Hardcore</h3><p>Keep Inventory is disabled, so death matters on the server.</p></div>
-<div class="feature motion" style="--delay:120ms"><span class="tag">Automatic</span><h3>Steady Stats</h3><p>Player attributes work correctly on the server.</p></div>
-<div class="feature motion" style="--delay:120ms"><span class="tag">Building</span><h3>Cottage Displays</h3><p>Provides decorative displays for builds.</p><p><strong>Tutorial:</strong> Requires the Dream Displays mod on the Java client.</p></div>
-<div class="feature motion" style="--delay:120ms"><span class="tag">Harvesting</span><h3>Cottage Harvest</h3><p>Harvest eligible connected wood and ores while sneaking. Stripped logs are excluded.</p></div>
-<div class="feature motion" style="--delay:120ms"><span class="tag">Voice</span><h3>Cottage Voice</h3><p>Provides proximity voice chat.</p><p><strong>Tutorial:</strong> Java players need the required voice-chat support installed. Bedrock players can use <span class="code">/dvc start</span>.</p></div>
-</div>
-</section>
-
-<section class="card motion-scale rules" style="--delay:300ms">
-<div class="card-title">◈ The Cottage★ Code of Conduct</div>
-<p class="card-subtitle">Community standards for The Cottage★ Discord and SMP.</p>
-<div class="notice">⌁ The Minecraft-specific rules are listed separately under <span class="code">mcrules?</span>. Please follow both sets of rules while participating in The Cottage★.</div>
-
-<div class="rule"><h3>Ⅰ. ◇ Respect Everyone</h3><p>Treat members with respect. No harassment, bullying, threats, hate speech, or targeted behavior.</p></div>
-<div class="rule"><h3>Ⅱ. ◇ Keep It Appropriate</h3><p>No sexual, excessively disturbing, or otherwise inappropriate content.</p></div>
-<div class="rule"><h3>Ⅲ. ◇ No Spam or Disruption</h3><p>Don't flood chats, abuse mentions, intentionally disrupt conversations, or misuse bots and server features.</p></div>
-<div class="rule"><h3>Ⅳ. ◇ Keep Personal Information Private</h3><p>Don't share private information, screenshots, conversations, or personal details without permission.</p></div>
-<div class="rule"><h3>Ⅴ. ◇ No Malicious Content</h3><p>No malware, phishing, scams, malicious links, or attempts to compromise another person's account.</p></div>
-<div class="rule"><h3>Ⅵ. ◇ Respect Staff</h3><p>Follow reasonable moderator instructions. If you disagree with a decision, discuss it privately rather than starting a public argument.</p></div>
-<div class="rule"><h3>Ⅶ. ◇ Play Fair</h3><p>Follow the Minecraft rules in <span class="code">mcrules?</span> while playing on The Cottage★ SMP.</p></div>
-<div class="rule"><h3>Ⅷ. ◇ Use Common Sense</h3><p>If something is clearly intended to harm, disrupt, deceive, or exploit the community, don't do it—even if it isn't specifically listed above.</p></div>
-
-<div class="ending"><strong>⌁ Enforcement</strong><br>Breaking the rules may result in a <strong>warning, timeout, kick, or ban</strong> depending on the situation.<br><br><strong>Respect the community. Protect the experience. Have fun.</strong></div>
-</section>
-
-<footer class="footer motion" style="--delay:360ms">The Cottage★ • Chapter 1 • Season 5</footer>
-</main>
-<script>
-(() => {
-  document.body.classList.add("js-ready");
-  const progress = document.querySelector(".scroll-progress span");
-  const updateProgress = () => {
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    const ratio = max > 0 ? window.scrollY / max : 0;
-    if (progress) progress.style.width = (ratio * 100) + "%";
-  };
-  updateProgress();
-  window.addEventListener("scroll", updateProgress, { passive:true });
-
-  const items = document.querySelectorAll(".motion, .motion-scale");
-  if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold:0.12, rootMargin:"0px 0px -5% 0px" });
-    items.forEach((item) => observer.observe(item));
-  } else {
-    items.forEach((item) => item.classList.add("is-visible"));
-  }
-
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    const ambient = document.querySelector(".ambient");
-    if (ambient) {
-      window.addEventListener("pointermove", (event) => {
-        const x = (event.clientX / window.innerWidth - 0.5) * 10;
-        const y = (event.clientY / window.innerHeight - 0.5) * 10;
-        ambient.style.transform = `translate3d(${x}px,${y}px,0)`;
-      }, { passive:true });
-    }
-  }
-})();
-</script>
-</body>
-</html>
+<div class="page-bg" aria-hidden="true"></div><div class="orb-layer" aria-hidden="true"><div class="orb one"></div><div class="orb two"></div><div class="orb three"></div></div><div class="cursor-glow" aria-hidden="true"></div><div class="progress" aria-hidden="true"><span></span></div>
+<div class="shell">
+<nav class="topnav reveal" style="--delay:40ms"><a class="brand-mini" href="index.html"><img src="IMG_8048-modified.png" alt=""><span>The Cottage★</span></a><div class="navlinks"><a href="index.html">The Home</a><a href="#features">Features</a><a href="#rules">Rules</a><a href="https://the-cottage.onrender.com/" target="_blank" rel="noopener" class="nav-pill">Discord</a></div></nav>
+<header class="smp-hero"><div class="smp-hero-card reveal"><div class="smp-hero-title"><div class="eyebrow">The backyard · Chapter 1 • Season 5</div><h1>The Cottage★ SMP</h1><p>A shared Minecraft world for the people who call The Cottage★ home. It's an activity inside the community — a place to build, explore, mess around, and make more memories together.</p><div class="smp-facts"><div class="fact"><span>Style</span><strong>Hardcore Survival</strong></div><div class="fact"><span>Access</span><strong>Invite Only</strong></div><div class="fact"><span>Platforms</span><strong>Java + Bedrock</strong></div><div class="fact"><span>Voice</span><strong>Proximity Chat</strong></div></div></div></div></header>
+<section class="section" id="features"><div class="section-head reveal"><div><div class="eyebrow">What lives in the backyard</div><h2>Features built for playing together.</h2></div><p class="section-intro">The SMP stays recognizably Minecraft while adding small systems that make a private community world nicer to live in.</p></div>
+<div class="feature-showcase">
+<article class="feature-card reveal-left" data-tilt style="--delay:40ms"><span class="tag">Automatic</span><h3>Open Doors</h3><p>Players can join without owning a premium Minecraft account.</p></article>
+<article class="feature-card reveal-right" data-tilt style="--delay:90ms"><span class="tag">Movement</span><h3>Cottage Boost</h3><p>Elytra flight and spear lunging give movement a little extra personality.</p><p><strong>Tutorial:</strong> Use an Elytra while using a spear with the Lunge enchantment.</p></article>
+<article class="feature-card reveal-left" data-tilt style="--delay:120ms"><span class="tag">Automatic</span><h3>Grand Arrivals</h3><p>Players get special animations when entering the world.</p></article>
+<article class="feature-card reveal-right" data-tilt style="--delay:150ms"><span class="tag">Villagers</span><h3>Friendly Neighbors</h3><p>Convenient villager interactions for moving them around your builds.</p><p><strong>Tutorial:</strong> Crouch and right-click a villager.</p></article>
+<article class="feature-card reveal-left" data-tilt style="--delay:180ms"><span class="tag">Customization</span><h3>Cottage Custom</h3><p>Pose and customize armor stands for decorative builds.</p><p><strong>Tutorial:</strong> Use a tripwire hook to configure item displays.</p></article>
+<article class="feature-card reveal-right" data-tilt style="--delay:80ms"><span class="tag">Protection</span><h3>Cottage Protection</h3><p>Protect builds and belongings with player claims.</p><p><strong>Tutorial:</strong> Hold a golden shovel and use <span class="code">/claimhelp</span>.</p></article>
+<article class="feature-card reveal-left" data-tilt style="--delay:120ms"><span class="tag">Utility</span><h3>Cozy Repairs</h3><p>A more convenient Mending experience.</p><p><strong>Tutorial:</strong> Crouch and right-click a tool with Mending.</p></article>
+<article class="feature-card reveal-right" data-tilt style="--delay:160ms"><span class="tag">Teams</span><h3>Cottage Teams</h3><p>Team up with other players and share a little corner of the world.</p><p><strong>Tutorial:</strong> <span class="code">/team create &lt;name&gt;</span>.</p></article>
+<article class="feature-card reveal-left" data-tilt style="--delay:190ms"><span class="tag">Comfort</span><h3>Cozy Sitting</h3><p>Sit around the world using <span class="code">/sit</span>, or interact with supported blocks and players.</p></article>
+<article class="feature-card reveal-right" data-tilt style="--delay:220ms"><span class="tag">Travel</span><h3>Wanderer's Way</h3><p>Type <span class="code">/rtp</span> to teleport to a random location and find somewhere new.</p></article>
+<article class="feature-card reveal-left" data-tilt style="--delay:90ms"><span class="tag">Survival</span><h3>True Hardcore</h3><p>Keep Inventory is disabled, so death still matters.</p></article>
+<article class="feature-card reveal-right" data-tilt style="--delay:130ms"><span class="tag">Building</span><h3>Cottage Displays</h3><p>Decorative display tools for builders.</p><p><strong>Tutorial:</strong> Java clients need the Dream Displays mod.</p></article>
+<article class="feature-card reveal-left" data-tilt style="--delay:170ms"><span class="tag">Harvesting</span><h3>Cottage Harvest</h3><p>Harvest eligible connected wood and ores while sneaking. Stripped logs are excluded.</p></article>
+<article class="feature-card reveal-right" data-tilt style="--delay:210ms"><span class="tag">Voice</span><h3>Cottage Voice</h3><p>Proximity voice chat for hanging out while playing.</p><p><strong>Tutorial:</strong> Bedrock players can use <span class="code">/dvc start</span>.</p></article>
+<article class="feature-card reveal-left" data-tilt style="--delay:250ms"><span class="tag">Special</span><h3>The Cottage Mace</h3><p>A one-of-a-kind server setup built specifically for this world.</p></article>
+<article class="feature-card reveal-right" data-tilt style="--delay:290ms"><span class="tag">Death</span><h3>Memorial Keepsakes</h3><p>A player's head is left behind when they die as a little memorial of their time in the world.</p></article>
+</div></section>
+<section class="section" id="rules"><div class="section-head reveal"><div><div class="eyebrow">Shared space</div><h2>Keep the backyard nice.</h2></div><p class="section-intro">The community rules apply here too. Minecraft-specific rules are handled separately through <span class="code">mcrules?</span>.</p></div>
+<div class="paper rules reveal"><div class="notice">The Cottage★ is built around people first. Treat the people in the backyard with the same respect you would give them in the main home.</div><div class="rules-list">
+<div class="rule"><strong>Respect everyone</strong><p>No harassment, bullying, threats, hate speech, or targeted behavior.</p></div><div class="rule"><strong>Keep it appropriate</strong><p>No sexual, excessively disturbing, or otherwise inappropriate content.</p></div><div class="rule"><strong>No disruption</strong><p>Don't intentionally disrupt the community, spam, abuse mentions, or misuse server features.</p></div><div class="rule"><strong>Protect privacy</strong><p>Don't share private information, screenshots, conversations, or personal details without permission.</p></div><div class="rule"><strong>No malicious content</strong><p>No malware, phishing, scams, malicious links, or attempts to compromise another person's account.</p></div><div class="rule"><strong>Play fair</strong><p>Follow the Minecraft rules listed under <span class="code">mcrules?</span>.</p></div>
+</div><div class="notice"><strong>Enforcement:</strong> Depending on the situation, breaking the rules may result in a warning, timeout, kick, or ban.</div></div></section>
+<section class="section"><div class="paper invite-card reveal"><div class="invite-copy"><div class="eyebrow">Back to the home</div><h2>Ready to come inside?</h2><p>The Discord is the main Cottage★ community. The SMP is waiting in the backyard when you feel like playing.</p><div class="hero-actions" style="justify-content:flex-start"><a class="btn primary" href="index.html">Return to The Cottage <span class="arrow">→</span></a><a class="btn secondary" href="https://the-cottage.onrender.com/" target="_blank" rel="noopener">Join the Discord</a></div></div><div class="pullquote"><strong>The world is only one room in the house.<br>The people are the Cottage.</strong></div></div></section>
+<footer class="footer">The Cottage★ SMP · Chapter 1 • Season 5</footer>
+</div><script src="cottage.js"></script>
+</body></html>
