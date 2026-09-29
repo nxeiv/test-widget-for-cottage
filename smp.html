@@ -26,12 +26,46 @@ h1{margin:15px 0 0;font-size:clamp(30px,6vw,44px);letter-spacing:-1px}.subtitle{
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:700px){body{padding:16px}.topbar{align-items:stretch}.info-grid,.feature-grid{grid-template-columns:1fr}.card{padding:20px}}
 </style>
+<style>
+/* The Cottage★ motion layer — soft, ambient, and intentionally understated */
+:root{--motion-ease:cubic-bezier(.22,1,.36,1);--motion-duration:.7s}
+body::before{
+  content:"";position:fixed;inset:-18%;z-index:-3;pointer-events:none;
+  background:radial-gradient(circle at 18% 24%,rgba(255,255,255,.10),transparent 28%),radial-gradient(circle at 82% 72%,rgba(180,205,190,.08),transparent 30%);
+  filter:blur(34px);animation:ambientDrift 18s ease-in-out infinite alternate;
+}
+.ambient{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden}
+.ambient span{
+  position:absolute;width:26vw;height:26vw;min-width:180px;min-height:180px;max-width:420px;max-height:420px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.07),transparent 68%);filter:blur(18px);opacity:.6;animation:floatBlob 16s ease-in-out infinite;
+}
+.ambient span:first-child{top:8%;left:-7%}.ambient span:last-child{right:-8%;bottom:4%;animation-delay:-7s;animation-duration:20s}
+.scroll-progress{position:fixed;top:0;left:0;width:100%;height:2px;z-index:1000;pointer-events:none}
+.scroll-progress span{display:block;width:0;height:100%;background:rgba(255,255,255,.72);box-shadow:0 0 10px rgba(255,255,255,.28);transform-origin:left center}
+.js-ready .motion{opacity:0;transform:translateY(18px);transition:opacity var(--motion-duration) var(--motion-ease),transform var(--motion-duration) var(--motion-ease);transition-delay:var(--delay,0ms)}
+.js-ready .motion.is-visible{opacity:1;transform:none}
+.js-ready .motion-scale{opacity:0;transform:scale(.985) translateY(10px);transition:opacity .8s var(--motion-ease),transform .8s var(--motion-ease)}
+.js-ready .motion-scale.is-visible{opacity:1;transform:none}
+.logo img{animation:logoFloat 5s ease-in-out infinite}.logo:hover img{animation-play-state:paused}
+.button{position:relative;overflow:hidden}
+.button::after{content:"";position:absolute;top:0;left:-120%;width:72%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.16),transparent);transform:skewX(-18deg);transition:left .55s ease;pointer-events:none}
+.button:hover::after{left:145%}
+.card:hover{transform:translateY(-2px);transition:transform .35s var(--motion-ease),box-shadow .35s var(--motion-ease)}
+@keyframes ambientDrift{0%{transform:translate3d(-1%,0,0) scale(1)}100%{transform:translate3d(1.5%,-1%,0) scale(1.04)}}
+@keyframes floatBlob{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(18px,-12px,0) scale(1.08)}}
+@keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .js-ready .motion,.js-ready .motion-scale{opacity:1;transform:none}
+}
+</style>
 </head>
-<body>
+<body>\n<div class="ambient" aria-hidden="true"><span></span><span></span></div>\n<div class="scroll-progress" aria-hidden="true"><span></span></div>
 <main class="container">
-<nav class="topbar"><a class="back" href="index.html">← The Cottage★</a><a class="nav-link" href="#features">Features</a></nav>
+<nav class="topbar motion" style="--delay:40ms"><a class="back" href="index.html">← The Cottage★</a><a class="nav-link" href="#features">Features</a></nav>
 
-<header class="hero">
+<header class="hero motion" style="--delay:100ms">
 <a class="logo" href="index.html"><img src="IMG_8048.jpg" alt="The Cottage★ logo"></a>
 <h1>The Cottage★ SMP</h1>
 <p class="subtitle">Chapter 1 • Season 5<br>Everything you need to know about the current Cottage★ SMP setup.</p>
@@ -40,41 +74,41 @@ h1{margin:15px 0 0;font-size:clamp(30px,6vw,44px);letter-spacing:-1px}.subtitle{
 <section class="card">
 <div class="card-title">About the SMP</div>
 <div class="info-grid">
-<div class="info"><h3>◇ Hardcore Survival</h3><p>Chapter 1 • Season 5 with a survival-focused experience and carefully chosen quality-of-life features.</p></div>
-<div class="info"><h3>⌂ Private Community</h3><p>Access is managed through The Cottage★ community rather than through public server connection details.</p></div>
+<div class="info motion" style="--delay:160ms"><h3>◇ Hardcore Survival</h3><p>Chapter 1 • Season 5 with a survival-focused experience and carefully chosen quality-of-life features.</p></div>
+<div class="info motion" style="--delay:160ms"><h3>⌂ Private Community</h3><p>Access is managed through The Cottage★ community rather than through public server connection details.</p></div>
 </div>
 <div class="button-row"><a class="button" href="https://the-cottage.onrender.com/">Cottage★ Website / Discord</a></div>
 </section>
 
-<section class="card" id="features">
+<section class="card motion-scale" id="features" style="--delay:240ms">
 <div class="card-title">The Cottage★ SMP Features</div>
 <p class="card-subtitle">Current public feature names. Click-free, easy-to-scan descriptions with the player-facing tutorial where one is available.</p>
 <div class="feature-grid">
-<div class="feature"><span class="tag">Automatic</span><h3>Open Doors</h3><p>Players can join without owning a premium Minecraft account.</p></div>
-<div class="feature"><span class="tag">Movement</span><h3>Cottage Boost</h3><p>Provides Elytra flight and Spear Lunging.</p><p><strong>Tutorial:</strong> Use an Elytra while using a spear with the Lunge enchantment.</p></div>
-<div class="feature"><span class="tag">Automatic</span><h3>Grand Arrivals</h3><p>Players get special animations when entering the world.</p></div>
-<div class="feature"><span class="tag">Villagers</span><h3>Friendly Neighbors</h3><p>Provides convenient interactions with villagers.</p><p><strong>Tutorial:</strong> Crouch and right-click a villager to place them into your inventory.</p></div>
-<div class="feature"><span class="tag">Customization</span><h3>Cottage Custom</h3><p>Lets players customize and pose armor stands.</p><p><strong>Tutorial:</strong> Use a tripwire hook to configure item displays.</p></div>
-<div class="feature"><span class="tag">Special</span><h3>The Cottage Mace</h3><p>The server's special one-of-a-kind Mace setup.</p></div>
-<div class="feature"><span class="tag">Death</span><h3>Memorial Keepsakes</h3><p>A player's head is left behind when they die as a memorial keepsake.</p></div>
-<div class="feature"><span class="tag">Survival</span><h3>Classic Crafting</h3><p>Netherite is unavailable on the server.</p></div>
-<div class="feature"><span class="tag">Utility</span><h3>Cozy Repairs</h3><p>Provides a more convenient Mending experience.</p><p><strong>Tutorial:</strong> Crouch and right-click a tool with Mending.</p></div>
-<div class="feature"><span class="tag">Protection</span><h3>Cottage Protection</h3><p>Lets players protect their builds and belongings.</p><p><strong>Tutorial:</strong> Hold a golden shovel and use <span class="code">/claimhelp</span> for claim details.</p></div>
-<div class="feature"><span class="tag">Teams</span><h3>Cottage Teams</h3><p>Lets players team up with other players.</p><p><strong>Tutorial:</strong> Create a team with <span class="code">/team create &lt;name&gt;</span>. Use <span class="code">/team</span> for more details.</p></div>
-<div class="feature"><span class="tag">Comfort</span><h3>Cozy Sitting</h3><p>Lets players sit around the world.</p><p><strong>Tutorial:</strong> Use <span class="code">/sit</span> or right-click stairs, slabs, and players. Use <span class="code">/gsit toggle off</span> to disable accidental sitting.</p></div>
-<div class="feature"><span class="tag">Teleport</span><h3>Cottage Teleport</h3><p>Lets players send teleport requests.</p><p><strong>Tutorial:</strong> Use <span class="code">/tpa &lt;player&gt;</span>.</p></div>
-<div class="feature"><span class="tag">Travel</span><h3>Wanderer's Way</h3><p>Type <span class="code">/rtp</span> in chat to teleport in a random location.</p></div>
-<div class="feature"><span class="tag">Automatic</span><h3>Lantern Light</h3><p>Held light sources can illuminate the surroundings.</p></div>
-<div class="feature"><span class="tag">Quality of Life</span><h3>Fresh Vanilla</h3><p>Familiar vanilla gameplay with carefully chosen quality-of-life improvements.</p></div>
-<div class="feature"><span class="tag">Hardcore</span><h3>True Hardcore</h3><p>Keep Inventory is disabled, so death matters on the server.</p></div>
-<div class="feature"><span class="tag">Automatic</span><h3>Steady Stats</h3><p>Player attributes work correctly on the server.</p></div>
-<div class="feature"><span class="tag">Building</span><h3>Cottage Displays</h3><p>Provides decorative displays for builds.</p><p><strong>Tutorial:</strong> Requires the Dream Displays mod on the Java client.</p></div>
-<div class="feature"><span class="tag">Harvesting</span><h3>Cottage Harvest</h3><p>Harvest eligible connected wood and ores while sneaking. Stripped logs are excluded.</p></div>
-<div class="feature"><span class="tag">Voice</span><h3>Cottage Voice</h3><p>Provides proximity voice chat.</p><p><strong>Tutorial:</strong> Java players need the required voice-chat support installed. Bedrock players can use <span class="code">/dvc start</span>.</p></div>
+<div class="feature motion" style="--delay:120ms"><span class="tag">Automatic</span><h3>Open Doors</h3><p>Players can join without owning a premium Minecraft account.</p></div>
+<div class="feature motion" style="--delay:120ms"><span class="tag">Movement</span><h3>Cottage Boost</h3><p>Provides Elytra flight and Spear Lunging.</p><p><strong>Tutorial:</strong> Use an Elytra while using a spear with the Lunge enchantment.</p></div>
+<div class="feature motion" style="--delay:120ms"><span class="tag">Automatic</span><h3>Grand Arrivals</h3><p>Players get special animations when entering the world.</p></div>
+<div class="feature motion" style="--delay:120ms"><span class="tag">Villagers</span><h3>Friendly Neighbors</h3><p>Provides convenient interactions with villagers.</p><p><strong>Tutorial:</strong> Crouch and right-click a villager to place them into your inventory.</p></div>
+<div class="feature motion" style="--delay:120ms"><span class="tag">Customization</span><h3>Cottage Custom</h3><p>Lets players customize and pose armor stands.</p><p><strong>Tutorial:</strong> Use a tripwire hook to configure item displays.</p></div>
+<div class="feature motion" style="--delay:120ms"><span class="tag">Special</span><h3>The Cottage Mace</h3><p>The server's special one-of-a-kind Mace setup.</p></div>
+<div class="feature motion" style="--delay:120ms"><span class="tag">Death</span><h3>Memorial Keepsakes</h3><p>A player's head is left behind when they die as a memorial keepsake.</p></div>
+<div class="feature motion" style="--delay:120ms"><span class="tag">Survival</span><h3>Classic Crafting</h3><p>Netherite is unavailable on the server.</p></div>
+<div class="feature motion" style="--delay:120ms"><span class="tag">Utility</span><h3>Cozy Repairs</h3><p>Provides a more convenient Mending experience.</p><p><strong>Tutorial:</strong> Crouch and right-click a tool with Mending.</p></div>
+<div class="feature motion" style="--delay:120ms"><span class="tag">Protection</span><h3>Cottage Protection</h3><p>Lets players protect their builds and belongings.</p><p><strong>Tutorial:</strong> Hold a golden shovel and use <span class="code">/claimhelp</span> for claim details.</p></div>
+<div class="feature motion" style="--delay:120ms"><span class="tag">Teams</span><h3>Cottage Teams</h3><p>Lets players team up with other players.</p><p><strong>Tutorial:</strong> Create a team with <span class="code">/team create &lt;name&gt;</span>. Use <span class="code">/team</span> for more details.</p></div>
+<div class="feature motion" style="--delay:120ms"><span class="tag">Comfort</span><h3>Cozy Sitting</h3><p>Lets players sit around the world.</p><p><strong>Tutorial:</strong> Use <span class="code">/sit</span> or right-click stairs, slabs, and players. Use <span class="code">/gsit toggle off</span> to disable accidental sitting.</p></div>
+<div class="feature motion" style="--delay:120ms"><span class="tag">Teleport</span><h3>Cottage Teleport</h3><p>Lets players send teleport requests.</p><p><strong>Tutorial:</strong> Use <span class="code">/tpa &lt;player&gt;</span>.</p></div>
+<div class="feature motion" style="--delay:120ms"><span class="tag">Travel</span><h3>Wanderer's Way</h3><p>Type <span class="code">/rtp</span> in chat to teleport in a random location.</p></div>
+<div class="feature motion" style="--delay:120ms"><span class="tag">Automatic</span><h3>Lantern Light</h3><p>Held light sources can illuminate the surroundings.</p></div>
+<div class="feature motion" style="--delay:120ms"><span class="tag">Quality of Life</span><h3>Fresh Vanilla</h3><p>Familiar vanilla gameplay with carefully chosen quality-of-life improvements.</p></div>
+<div class="feature motion" style="--delay:120ms"><span class="tag">Hardcore</span><h3>True Hardcore</h3><p>Keep Inventory is disabled, so death matters on the server.</p></div>
+<div class="feature motion" style="--delay:120ms"><span class="tag">Automatic</span><h3>Steady Stats</h3><p>Player attributes work correctly on the server.</p></div>
+<div class="feature motion" style="--delay:120ms"><span class="tag">Building</span><h3>Cottage Displays</h3><p>Provides decorative displays for builds.</p><p><strong>Tutorial:</strong> Requires the Dream Displays mod on the Java client.</p></div>
+<div class="feature motion" style="--delay:120ms"><span class="tag">Harvesting</span><h3>Cottage Harvest</h3><p>Harvest eligible connected wood and ores while sneaking. Stripped logs are excluded.</p></div>
+<div class="feature motion" style="--delay:120ms"><span class="tag">Voice</span><h3>Cottage Voice</h3><p>Provides proximity voice chat.</p><p><strong>Tutorial:</strong> Java players need the required voice-chat support installed. Bedrock players can use <span class="code">/dvc start</span>.</p></div>
 </div>
 </section>
 
-<section class="card rules">
+<section class="card motion-scale rules" style="--delay:300ms">
 <div class="card-title">◈ The Cottage★ Code of Conduct</div>
 <p class="card-subtitle">Community standards for The Cottage★ Discord and SMP.</p>
 <div class="notice">⌁ The Minecraft-specific rules are listed separately under <span class="code">mcrules?</span>. Please follow both sets of rules while participating in The Cottage★.</div>
@@ -91,7 +125,46 @@ h1{margin:15px 0 0;font-size:clamp(30px,6vw,44px);letter-spacing:-1px}.subtitle{
 <div class="ending"><strong>⌁ Enforcement</strong><br>Breaking the rules may result in a <strong>warning, timeout, kick, or ban</strong> depending on the situation.<br><br><strong>Respect the community. Protect the experience. Have fun.</strong></div>
 </section>
 
-<footer class="footer">The Cottage★ • Chapter 1 • Season 5</footer>
+<footer class="footer motion" style="--delay:360ms">The Cottage★ • Chapter 1 • Season 5</footer>
 </main>
+<script>
+(() => {
+  document.body.classList.add("js-ready");
+  const progress = document.querySelector(".scroll-progress span");
+  const updateProgress = () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const ratio = max > 0 ? window.scrollY / max : 0;
+    if (progress) progress.style.width = (ratio * 100) + "%";
+  };
+  updateProgress();
+  window.addEventListener("scroll", updateProgress, { passive:true });
+
+  const items = document.querySelectorAll(".motion, .motion-scale");
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold:0.12, rootMargin:"0px 0px -5% 0px" });
+    items.forEach((item) => observer.observe(item));
+  } else {
+    items.forEach((item) => item.classList.add("is-visible"));
+  }
+
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const ambient = document.querySelector(".ambient");
+    if (ambient) {
+      window.addEventListener("pointermove", (event) => {
+        const x = (event.clientX / window.innerWidth - 0.5) * 10;
+        const y = (event.clientY / window.innerHeight - 0.5) * 10;
+        ambient.style.transform = `translate3d(${x}px,${y}px,0)`;
+      }, { passive:true });
+    }
+  }
+})();
+</script>
 </body>
 </html>
