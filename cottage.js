@@ -9,7 +9,7 @@
   updateProgress();
   window.addEventListener("scroll", updateProgress, { passive:true });
 
-  const items = document.querySelectorAll(".reveal,.reveal-left,.reveal-right");
+  const items = document.querySelectorAll(".reveal,.reveal-left,.reveal-right,.home-transition");
   if ("IntersectionObserver" in window && !reduced) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
