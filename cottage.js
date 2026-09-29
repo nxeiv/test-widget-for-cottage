@@ -85,6 +85,7 @@
   });
 })();
 
+
   const roomDetails = {
     home: {label:"01 · THE HOME", title:"The people are the center.", text:"There is no activity you have to do to belong here. The Cottage★ is the group first.", link:"#about", linkText:"Read the story →"},
     discord: {label:"02 · DISCORD", title:"Where the everyday stuff happens.", text:"Talk, calls, updates, jokes, quiet company, and the conversations that make the community feel like a home.", link:"#join", linkText:"Come to the door →"},
