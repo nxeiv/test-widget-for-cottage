@@ -1,6 +1,7 @@
 (() => {
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const progress = document.querySelector(".progress span");
+  const topnav = document.querySelector(".topnav");
   const updateProgress = () => {
     if (!progress) return;
     const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -8,6 +9,11 @@
   };
   updateProgress();
   window.addEventListener("scroll", updateProgress, { passive:true });
+  const updateNav = () => {
+    if (topnav) topnav.classList.toggle("scrolled", window.scrollY > 24);
+  };
+  updateNav();
+  window.addEventListener("scroll", updateNav, { passive:true });
 
   const items = document.querySelectorAll(".reveal,.reveal-left,.reveal-right,.home-transition");
   if ("IntersectionObserver" in window && !reduced) {
