@@ -81,20 +81,34 @@
       let currentX = 0;
       let currentY = 0;
       let tiltFrame = 0;
+      let active = false;
 
       const animateTilt = () => {
         currentX += (targetX - currentX) * 0.14;
         currentY += (targetY - currentY) * 0.14;
 
-        if (Math.abs(targetX - currentX) < 0.01 && Math.abs(targetY - currentY) < 0.01) {
-          currentX = targetX;
-          currentY = targetY;
-        }
-
         card.style.transform =
           "perspective(900px) rotateX(" + currentX + "deg) rotateY(" + currentY + "deg) translateY(-7px)";
 
+        const settled =
+          Math.abs(targetX - currentX) < 0.02 &&
+          Math.abs(targetY - currentY) < 0.02;
+
+        if (settled && !active) {
+          currentX = targetX;
+          currentY = targetY;
+          card.style.transform = "";
+          tiltFrame = 0;
+          return;
+        }
+
         tiltFrame = requestAnimationFrame(animateTilt);
+      };
+
+      const wakeTilt = () => {
+        if (!tiltFrame) {
+          tiltFrame = requestAnimationFrame(animateTilt);
+        }
       };
 
       card.addEventListener("pointermove", (event) => {
@@ -104,32 +118,17 @@
         const y = (event.clientY - rect.top) / rect.height;
         targetX = (.5 - y) * 5.5;
         targetY = (x - .5) * 6.5;
+        active = true;
+        wakeTilt();
       });
 
       card.addEventListener("pointerleave", () => {
         targetX = 0;
         targetY = 0;
-        window.setTimeout(() => {
-          if (Math.abs(currentX) < 0.05 && Math.abs(currentY) < 0.05) {
-            card.style.transform = "";
-          }
-        }, 220);
+        active = false;
+        wakeTilt();
       });
-
-      animateTilt();
     });
-
-    document.querySelectorAll(".btn.primary").forEach((btn) => {
-      btn.addEventListener("pointermove", (event) => {
-        if (!window.matchMedia("(pointer:fine)").matches) return;
-        const rect = btn.getBoundingClientRect();
-        const x = (event.clientX - rect.left - rect.width / 2) * .08;
-        const y = (event.clientY - rect.top - rect.height / 2) * .08;
-        btn.style.transform = "translate3d(" + x + "px," + y + "px,0) translateY(-5px)";
-      });
-      btn.addEventListener("pointerleave", () => { btn.style.transform = ""; });
-    });
-  }
 
   const parallax = document.querySelectorAll("[data-parallax]");
   if (parallax.length && !reduced) {
