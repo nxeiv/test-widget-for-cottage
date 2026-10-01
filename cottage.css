@@ -869,3 +869,8 @@ html{scroll-padding-top:100px}
     border-radius:18px;
   }
 }
+
+/* Live Minecraft status states */
+.live-dot[data-state="online"]{background:var(--sage)}
+.live-dot[data-state="warning"]{background:var(--gold);box-shadow:0 0 0 6px rgba(201,169,104,.12)}
+.live-dot[data-state="offline"]{background:var(--rose);box-shadow:0 0 0 6px rgba(199,143,130,.12)}
