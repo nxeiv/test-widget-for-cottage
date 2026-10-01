@@ -167,6 +167,7 @@
   const liveStates = document.querySelectorAll(".live-state,.smp-live-state");
   const liveTimes = document.querySelectorAll(".live-time,.smp-live-time");
   const liveDots = document.querySelectorAll(".live-dot");
+  const livePanels = document.querySelectorAll(".live-panel");
   const liveUptimes = document.querySelectorAll(".live-uptime,.smp-live-uptime");
   const livePlayers = document.querySelectorAll(".live-players,.smp-live-players");
 
@@ -204,6 +205,7 @@
       el.classList.toggle("live-dot-offline", colorState === "offline");
       el.classList.toggle("live-dot-warning", colorState === "warning");
     });
+    livePanels.forEach((panel) => { panel.dataset.liveState = colorState; });
   };
 
   const renderMinecraftStatus = (data) => {
