@@ -174,8 +174,10 @@
 
     let currentIndex = 0;
     let previousFocused = null;
+    let originElement = null;
     let isOpen = false;
     let isAnimating = false;
+    let hasNavigated = false;
     let touchStartX = 0;
     let touchDeltaX = 0;
 
@@ -183,16 +185,13 @@
       img.setAttribute("tabindex", "0");
       img.setAttribute("role", "button");
       img.setAttribute("aria-label", "Open image " + (index + 1));
-
-      const openFromKeyboard = (event) => {
+      img.addEventListener("click", () => open(index));
+      img.addEventListener("keydown", (event) => {
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
           open(index);
         }
-      };
-
-      img.addEventListener("click", () => open(index));
-      img.addEventListener("keydown", openFromKeyboard);
+      });
     });
 
     const getCaption = (img) => {
@@ -221,6 +220,26 @@
       };
     };
 
+    const getElementRect = (img) => {
+      if (!img) return null;
+      const rect = img.getBoundingClientRect();
+      if (rect.width < 2 || rect.height < 2) return null;
+      return { left:rect.left, top:rect.top, width:rect.width, height:rect.height };
+    };
+
+    const setGeometry = (rect) => {
+      if (!rect) return;
+      imageWrap.style.left = rect.left + "px";
+      imageWrap.style.top = rect.top + "px";
+      imageWrap.style.width = rect.width + "px";
+      imageWrap.style.height = rect.height + "px";
+    };
+
+    const cancelViewerAnimations = () => {
+      imageWrap.getAnimations().forEach((animation) => animation.cancel());
+      lightbox.getAnimations().forEach((animation) => animation.cancel());
+    };
+
     const setMeta = (img, index) => {
       counter.textContent = String(index + 1).padStart(2, "0") + " / " + String(galleryImages.length).padStart(2, "0");
       caption.textContent = getCaption(img);
@@ -236,142 +255,142 @@
       setMeta(source, currentIndex);
     };
 
-    const animateBetween = (direction) => {
-      if (isAnimating || galleryImages.length < 2) return;
+    const animateTo = async (fromRect, toRect, duration, easing) => {
+      if (!fromRect || !toRect) return;
+      setGeometry(fromRect);
+      const animation = imageWrap.animate(
+        [
+          { left:fromRect.left + "px", top:fromRect.top + "px", width:fromRect.width + "px", height:fromRect.height + "px", borderRadius:"24px" },
+          { left:toRect.left + "px", top:toRect.top + "px", width:toRect.width + "px", height:toRect.height + "px", borderRadius:"28px" }
+        ],
+        { duration, easing, fill:"forwards" }
+      );
+      try {
+        await animation.finished;
+      } catch (_) {}
+      setGeometry(toRect);
+    };
+
+    const animateBetween = async (direction) => {
+      if (!isOpen || isAnimating || galleryImages.length < 2) return;
       isAnimating = true;
+      hasNavigated = true;
 
-      if (reduced) {
-        imageWrap.style.opacity = "0";
-        imageWrap.style.transform = direction > 0 ? "translateX(22px) scale(.985)" : "translateX(-22px) scale(.985)";
-        window.setTimeout(() => {
-          applyImage(currentIndex + direction);
-          imageWrap.animate(
-            [
-              { opacity:0, transform: direction > 0 ? "translateX(-22px) scale(.985)" : "translateX(22px) scale(.985)" },
-              { opacity:1, transform:"none" }
-            ],
-            { duration:220, easing:"ease-out", fill:"forwards" }
-          ).finished.finally(() => { isAnimating = false; });
-        }, 40);
-        return;
-      }
-
-      imageWrap.animate(
+      const outAnimation = imageWrap.animate(
         [
           { opacity:1, transform:"translate3d(0,0,0) scale(1)" },
           { opacity:0, transform:(direction > 0 ? "translate3d(-42px,0,0)" : "translate3d(42px,0,0)") + " scale(.965)" }
         ],
-        { duration:230, easing:"cubic-bezier(.7,0,.84,0)", fill:"forwards" }
-      ).finished.then(() => {
-        applyImage(currentIndex + direction);
-        imageWrap.animate(
-          [
-            { opacity:0, transform:(direction > 0 ? "translate3d(42px,0,0)" : "translate3d(-42px,0,0)") + " scale(.965)" },
-            { opacity:1, transform:"translate3d(0,0,0) scale(1)" }
-          ],
-          { duration:380, easing:"cubic-bezier(.16,1,.3,1)", fill:"forwards" }
-        ).finished.finally(() => { isAnimating = false; });
-      }).catch(() => { isAnimating = false; });
-    };
+        { duration:220, easing:"cubic-bezier(.7,0,.84,0)", fill:"forwards" }
+      );
 
-    const animateOpen = (source) => {
-      const sourceRect = source.getBoundingClientRect();
-      const target = getTargetRect(source);
-      const dx = target.left - sourceRect.left;
-      const dy = target.top - sourceRect.top;
-      const sx = target.width / Math.max(sourceRect.width, 1);
-      const sy = target.height / Math.max(sourceRect.height, 1);
+      try { await outAnimation.finished; } catch (_) {}
+      applyImage(currentIndex + direction);
 
-      imageWrap.style.left = "0px";
-      imageWrap.style.top = "0px";
-      imageWrap.style.width = sourceRect.width + "px";
-      imageWrap.style.height = sourceRect.height + "px";
-      imageWrap.style.transform = "translate3d(" + sourceRect.left + "px," + sourceRect.top + "px,0) scale(1)";
-      imageWrap.style.transformOrigin = "top left";
-      imageWrap.style.opacity = "1";
-
-      if (reduced) {
-        imageWrap.animate([{opacity:0, transform:"translate3d(" + target.left + "px," + target.top + "px,0) scale(" + sx + "," + sy + ")"},{opacity:1, transform:"translate3d(" + target.left + "px," + target.top + "px,0) scale(" + sx + "," + sy + ")"}], {duration:180, fill:"forwards"}).finished.finally(() => { isAnimating = false; });
-        return;
-      }
-
-      imageWrap.animate(
+      const inAnimation = imageWrap.animate(
         [
-          { transform:"translate3d(" + sourceRect.left + "px," + sourceRect.top + "px,0) scale(1)", borderRadius:"24px" },
-          { transform:"translate3d(" + target.left + "px," + target.top + "px,0) scale(" + sx + "," + sy + ")", borderRadius:"28px" }
+          { opacity:0, transform:(direction > 0 ? "translate3d(42px,0,0)" : "translate3d(-42px,0,0)") + " scale(.965)" },
+          { opacity:1, transform:"translate3d(0,0,0) scale(1)" }
         ],
-        { duration:760, easing:"cubic-bezier(.16,1,.3,1)", fill:"forwards" }
-      ).finished.finally(() => { isAnimating = false; });
-    };
+        { duration:360, easing:"cubic-bezier(.16,1,.3,1)", fill:"forwards" }
+      );
 
-    const resetLightboxGeometry = () => {
-      imageWrap.style.width = "";
-      imageWrap.style.height = "";
-      imageWrap.style.left = "";
-      imageWrap.style.top = "";
+      try { await inAnimation.finished; } catch (_) {}
+      imageWrap.style.opacity = "1";
       imageWrap.style.transform = "";
-      imageWrap.style.transformOrigin = "";
-      imageWrap.style.opacity = "";
+      isAnimating = false;
     };
 
-    const open = (index) => {
-      if (isOpen) return;
+    const open = async (index) => {
+      if (isOpen || !galleryImages[index]) return;
+
+      cancelViewerAnimations();
       const source = galleryImages[index];
-      if (!source) return;
+      const sourceRect = getElementRect(source);
+      const target = getTargetRect(source);
+      if (!sourceRect) return;
 
       previousFocused = document.activeElement;
+      originElement = source;
+      hasNavigated = false;
       currentIndex = index;
       applyImage(index);
+      setGeometry(sourceRect);
+      imageWrap.style.opacity = "1";
+      imageWrap.style.transform = "";
+
       isOpen = true;
       isAnimating = true;
       document.body.classList.add("lightbox-open");
       lightbox.classList.add("is-open", "is-opening");
       lightbox.setAttribute("aria-hidden", "false");
 
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          animateOpen(source);
-          lightbox.classList.remove("is-opening");
-          window.setTimeout(() => closeButton.focus(), 420);
-        });
-      });
-    };
+      await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
 
-    const close = () => {
-      if (!isOpen || isAnimating) return;
+      await animateTo(
+        sourceRect,
+        target,
+        reduced ? 180 : 760,
+        reduced ? "ease-out" : "cubic-bezier(.16,1,.3,1)"
+      );
 
-      const source = galleryImages[currentIndex];
-      const sourceRect = source ? source.getBoundingClientRect() : null;
-      const target = getTargetRect(source || galleryImages[0]);
-      isAnimating = true;
-
-      if (reduced || !sourceRect) {
-        lightbox.animate([{opacity:1},{opacity:0}], {duration:180, fill:"forwards"}).finished.finally(finishClose);
-        return;
-      }
-
-      const currentX = target.left;
-      const currentY = target.top;
-      const currentScaleX = target.width / Math.max(sourceRect.width, 1);
-      const currentScaleY = target.height / Math.max(sourceRect.height, 1);
-
-      imageWrap.animate(
-        [
-          { transform:"translate3d(" + currentX + "px," + currentY + "px,0) scale(" + currentScaleX + "," + currentScaleY + ")", borderRadius:"28px", opacity:1 },
-          { transform:"translate3d(" + sourceRect.left + "px," + sourceRect.top + "px,0) scale(1)", borderRadius:"24px", opacity:.92 }
-        ],
-        { duration:620, easing:"cubic-bezier(.7,0,.84,0)", fill:"forwards" }
-      ).finished.finally(finishClose);
+      lightbox.classList.remove("is-opening");
+      imageWrap.style.opacity = "1";
+      isAnimating = false;
+      window.setTimeout(() => closeButton.focus(), 80);
     };
 
     const finishClose = () => {
-      lightbox.classList.remove("is-open", "is-closing");
+      cancelViewerAnimations();
+      lightbox.classList.remove("is-open", "is-closing", "is-opening");
       lightbox.setAttribute("aria-hidden", "true");
       document.body.classList.remove("lightbox-open");
-      resetLightboxGeometry();
+      imageWrap.style.cssText = "";
       isOpen = false;
       isAnimating = false;
+      hasNavigated = false;
+      originElement = null;
       if (previousFocused && typeof previousFocused.focus === "function") previousFocused.focus();
+    };
+
+    const close = async () => {
+      if (!isOpen || isAnimating) return;
+
+      isAnimating = true;
+      cancelViewerAnimations();
+      lightbox.classList.add("is-closing");
+
+      const source = hasNavigated ? null : originElement;
+      const sourceRect = getElementRect(source);
+
+      if (hasNavigated || !sourceRect) {
+        const animation = imageWrap.animate(
+          [
+            { opacity:1, transform:"scale(1)" },
+            { opacity:0, transform:"scale(.94) translateY(10px)" }
+          ],
+          { duration: reduced ? 140 : 300, easing:"cubic-bezier(.7,0,.84,0)", fill:"forwards" }
+        );
+        try { await animation.finished; } catch (_) {}
+        finishClose();
+        return;
+      }
+
+      const currentRect = {
+        left:parseFloat(imageWrap.style.left) || getTargetRect(originElement).left,
+        top:parseFloat(imageWrap.style.top) || getTargetRect(originElement).top,
+        width:parseFloat(imageWrap.style.width) || getTargetRect(originElement).width,
+        height:parseFloat(imageWrap.style.height) || getTargetRect(originElement).height
+      };
+
+      await animateTo(
+        currentRect,
+        sourceRect,
+        reduced ? 160 : 600,
+        reduced ? "ease-out" : "cubic-bezier(.7,0,.84,0)"
+      );
+
+      finishClose();
     };
 
     closeButton.addEventListener("click", close);
@@ -387,14 +406,14 @@
     });
 
     stage.addEventListener("pointerdown", (event) => {
-      if (!isOpen) return;
+      if (!isOpen || isAnimating) return;
       touchStartX = event.clientX;
       touchDeltaX = 0;
       stage.setPointerCapture?.(event.pointerId);
     });
 
     stage.addEventListener("pointermove", (event) => {
-      if (!isOpen || !touchStartX) return;
+      if (!isOpen || isAnimating || !touchStartX) return;
       touchDeltaX = event.clientX - touchStartX;
       if (Math.abs(touchDeltaX) > 12) {
         imageWrap.style.setProperty("--drag-x", touchDeltaX + "px");
@@ -403,7 +422,7 @@
     });
 
     stage.addEventListener("pointerup", () => {
-      if (!isOpen) return;
+      if (!isOpen || isAnimating) return;
       imageWrap.classList.remove("is-dragging");
       imageWrap.style.removeProperty("--drag-x");
       if (Math.abs(touchDeltaX) > 58) animateBetween(touchDeltaX < 0 ? 1 : -1);
@@ -421,7 +440,7 @@
     window.addEventListener("resize", () => {
       if (!isOpen || isAnimating) return;
       const target = getTargetRect(galleryImages[currentIndex]);
-      imageWrap.style.transform = "translate3d(" + target.left + "px," + target.top + "px,0) scale(" + (target.width / Math.max(imageWrap.offsetWidth,1)) + "," + (target.height / Math.max(imageWrap.offsetHeight,1)) + ")";
+      setGeometry(target);
     });
   }
 
