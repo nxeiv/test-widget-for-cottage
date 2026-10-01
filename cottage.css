@@ -810,3 +810,62 @@ html{scroll-padding-top:100px}
   .archive-section{padding-top:68px}
   .archive-grid{columns:1}
 }
+
+/* Match homepage gallery frames to the Gallery archive */
+.moment-frame,
+.smp-shot{
+  position:relative;
+  display:block;
+  padding:8px;
+  border-radius:26px;
+  background:rgba(255,253,248,.68);
+  border:1px solid rgba(255,255,255,.72);
+  box-shadow:var(--shadow-soft);
+  overflow:hidden;
+  transition:transform .65s var(--motion-soft),box-shadow .65s var(--motion-soft),background .55s var(--motion-soft);
+}
+.moment-frame:hover,
+.smp-shot:hover{
+  transform:translateY(-7px) scale(1.008);
+  box-shadow:0 28px 65px rgba(72,57,38,.17);
+  background:rgba(255,253,249,.84);
+}
+.moment-frame::before,
+.smp-shot::before{
+  content:"";
+  position:absolute;
+  inset:8px;
+  border-radius:20px;
+  background:linear-gradient(120deg,transparent 26%,rgba(255,255,255,.16) 50%,transparent 74%);
+  transform:translateX(-130%);
+  pointer-events:none;
+  opacity:0;
+  z-index:2;
+}
+.moment-frame:hover::before,
+.smp-shot:hover::before{
+  opacity:1;
+  animation:surfaceSweep 1.2s var(--motion-soft) forwards;
+}
+.moment-frame .moment-image,
+.smp-shot img{
+  position:relative;
+  z-index:1;
+  border-radius:20px;
+}
+@media(max-width:700px){
+  .moment-frame,
+  .smp-shot{
+    padding:7px;
+    border-radius:23px;
+  }
+  .moment-frame::before,
+  .smp-shot::before{
+    inset:7px;
+    border-radius:18px;
+  }
+  .moment-frame .moment-image,
+  .smp-shot img{
+    border-radius:18px;
+  }
+}
