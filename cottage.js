@@ -136,7 +136,7 @@
   if (intro) window.setTimeout(() => intro.remove(), 2400);
 
   // Cinematic image viewer
-  const galleryImages = Array.from(document.querySelectorAll(".moment-image, .smp-shot img"));
+  const galleryImages = Array.from(document.querySelectorAll(".moment-image, .smp-shot img, .gallery-photo"));
   if (galleryImages.length) {
     const lightbox = document.createElement("div");
     lightbox.className = "cottage-lightbox";
