@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="cottage.css">
 </head>
 <body>
+<a class="skip-link" href="#smp-gallery">Skip to content</a>
 <div class="page-bg" aria-hidden="true"></div>
 <div class="orb-layer" aria-hidden="true"><div class="orb one"></div><div class="orb two"></div><div class="orb three"></div></div>
 <div class="cursor-glow" aria-hidden="true"></div>
@@ -23,13 +24,17 @@
 
 <div class="shell">
   <nav class="topnav reveal" style="--delay:40ms">
-    <a class="brand-mini" href="index.html"><img src="IMG_8048-modified.png" alt=""><span>The Cottage★</span></a>
+    <a class="brand-mini" href="index.html"><img src="IMG_8048-modified.png" alt="The Cottage★ home"><span>The Cottage★</span></a>
     <div class="navlinks">
       <a href="index.html">The Home</a>
       <a href="smp.html">The SMP</a>
       <a href="#smp-gallery">SMP</a>
       <a href="#moments-gallery">Moments</a>
       <a href="https://the-cottage.onrender.com/" class="nav-pill">Discord</a>
+    </div>
+    <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <a href="index.html">The Home</a><a href="smp.html">The SMP</a><a href="#smp-gallery">SMP</a><a href="#moments-gallery">Moments</a><a href="https://the-cottage.onrender.com/" class="mobile-menu-pill">Discord</a>
     </div>
   </nav>
 
@@ -46,12 +51,17 @@
       <div><div class="archive-kicker">SMP</div><h2>The backyard.</h2></div>
       <p class="section-intro">The unused Minecraft frames from the current media archive.</p>
     </div>
+    <div class="gallery-filters" role="group" aria-label="Filter gallery">
+      <button type="button" class="gallery-filter is-active" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" class="gallery-filter" data-filter="smp" aria-pressed="false">SMP</button>
+      <button type="button" class="gallery-filter" data-filter="moments" aria-pressed="false">Moments</button>
+    </div>
     <div class="archive-grid">
-      <figure class="archive-card reveal"><img class="gallery-photo" src="Media/SMP%202.png" alt="The Cottage★ SMP — SMP 2" loading="lazy"></figure>
-      <figure class="archive-card reveal"><img class="gallery-photo" src="Media/SMP%205.png" alt="The Cottage★ SMP — SMP 5" loading="lazy"></figure>
-      <figure class="archive-card reveal"><img class="gallery-photo" src="Media/SMP%206.png" alt="The Cottage★ SMP — SMP 6" loading="lazy"></figure>
-      <figure class="archive-card reveal"><img class="gallery-photo" src="Media/SMP%207.png" alt="The Cottage★ SMP — SMP 7" loading="lazy"></figure>
-      <figure class="archive-card reveal"><img class="gallery-photo" src="Media/SMP%208.png" alt="The Cottage★ SMP — SMP 8" loading="lazy"></figure>
+      <figure class="archive-card reveal" data-category="smp"><img class="gallery-photo" src="Media/SMP%202.png" alt="The Cottage★ SMP — SMP 2" loading="lazy"></figure>
+      <figure class="archive-card reveal" data-category="smp"><img class="gallery-photo" src="Media/SMP%205.png" alt="The Cottage★ SMP — SMP 5" loading="lazy"></figure>
+      <figure class="archive-card reveal" data-category="smp"><img class="gallery-photo" src="Media/SMP%206.png" alt="The Cottage★ SMP — SMP 6" loading="lazy"></figure>
+      <figure class="archive-card reveal" data-category="smp"><img class="gallery-photo" src="Media/SMP%207.png" alt="The Cottage★ SMP — SMP 7" loading="lazy"></figure>
+      <figure class="archive-card reveal" data-category="smp"><img class="gallery-photo" src="Media/SMP%208.png" alt="The Cottage★ SMP — SMP 8" loading="lazy"></figure>
     </div>
   </section>
 
@@ -61,9 +71,9 @@
       <p class="section-intro">Games, memories, and community-made art collected together.</p>
     </div>
     <div class="archive-grid">
-      <figure class="archive-card reveal"><img class="gallery-photo" src="Media/Moment%201.png" alt="The Cottage★ — Moment 1" loading="lazy"></figure>
-      <figure class="archive-card reveal"><img class="gallery-photo" src="Media/Roblox%20Moment%202.jpg" alt="The Cottage★ — Roblox Moment 2" loading="lazy"></figure>
-      <figure class="archive-card reveal"><img class="gallery-photo" src="Media/Gartic%20Phone%20Art%201.jpg" alt="The Cottage★ — Gartic Phone Art 1" loading="lazy"></figure>
+      <figure class="archive-card reveal" data-category="moments"><img class="gallery-photo" src="Media/Moment%201.png" alt="The Cottage★ — Moment 1" loading="lazy"></figure>
+      <figure class="archive-card reveal" data-category="moments"><img class="gallery-photo" src="Media/Roblox%20Moment%202.jpg" alt="The Cottage★ — Roblox Moment 2" loading="lazy"></figure>
+      <figure class="archive-card reveal" data-category="moments"><img class="gallery-photo" src="Media/Gartic%20Phone%20Art%201.jpg" alt="The Cottage★ — Gartic Phone Art 1" loading="lazy"></figure>
     </div>
   </section>
 
