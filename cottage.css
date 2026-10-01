@@ -698,3 +698,115 @@ html{scroll-padding-top:100px}
   .bot-public-grid{grid-template-columns:1fr}
   .bot-feature:nth-child(3){grid-column:auto}
 }
+
+/* Gallery archive + SMP map hero */
+.smp-map-hero{
+  background:
+    linear-gradient(140deg,rgba(37,32,27,.28),rgba(37,32,27,.78)),
+    url("Media/SMP%20tiny%20map.png") center/cover no-repeat;
+}
+.gallery-archive-link{
+  display:flex;
+  justify-content:center;
+  margin-top:20px;
+}
+.gallery-archive-link .btn{min-width:210px}
+.gallery-page-hero{
+  min-height:62vh;
+  padding:78px 0 64px;
+  display:grid;
+  place-items:center;
+}
+.gallery-page-hero-card{
+  position:relative;
+  width:100%;
+  min-height:480px;
+  padding:56px;
+  display:grid;
+  align-content:end;
+  overflow:hidden;
+  border-radius:38px;
+  color:#fff;
+  background:
+    linear-gradient(145deg,rgba(45,39,32,.20),rgba(45,39,32,.80)),
+    url("2C58F125-5521-4799-A848-55533DF42A82.gif") center/cover;
+  box-shadow:0 34px 100px rgba(57,44,31,.24);
+  border:1px solid rgba(255,255,255,.52);
+}
+.gallery-page-hero-card::before{
+  content:"";position:absolute;inset:-25%;
+  background:radial-gradient(circle at 68% 28%,rgba(255,233,188,.24),transparent 20%),linear-gradient(110deg,transparent 25%,rgba(255,255,255,.08) 50%,transparent 72%);
+  animation:backyardSheen 12s ease-in-out infinite;
+}
+.gallery-page-hero-card>*{position:relative}
+.gallery-page-hero-card h1{
+  margin:0 0 14px;
+  font-size:clamp(52px,8vw,96px);
+  line-height:.92;
+  letter-spacing:-.07em;
+}
+.gallery-page-hero-card p{
+  max-width:660px;margin:0;color:rgba(255,255,255,.78);font-size:16px;line-height:1.72;
+}
+.archive-section{padding-top:90px}
+.archive-section+.archive-section{padding-top:30px}
+.archive-grid{
+  columns:3 280px;
+  column-gap:16px;
+  column-fill:balance;
+}
+.archive-card{
+  position:relative;
+  display:block;
+  width:100%;
+  margin:0 0 16px;
+  break-inside:avoid;
+  padding:8px;
+  border-radius:26px;
+  background:rgba(255,253,248,.68);
+  border:1px solid rgba(255,255,255,.72);
+  box-shadow:var(--shadow-soft);
+  overflow:hidden;
+  cursor:zoom-in;
+  transition:transform .65s var(--motion-soft),box-shadow .65s var(--motion-soft),background .55s var(--motion-soft);
+}
+.archive-card::before{
+  content:"";position:absolute;inset:8px;border-radius:20px;
+  background:linear-gradient(120deg,transparent 26%,rgba(255,255,255,.16) 50%,transparent 74%);
+  transform:translateX(-130%);
+  pointer-events:none;
+  opacity:0;
+  z-index:2;
+}
+.archive-card:hover{
+  transform:translateY(-7px) scale(1.008);
+  box-shadow:0 28px 65px rgba(72,57,38,.17);
+  background:rgba(255,253,249,.84);
+}
+.archive-card:hover::before{opacity:1;animation:surfaceSweep 1.2s var(--motion-soft) forwards}
+.archive-card img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:20px;
+  object-fit:contain;
+  background:rgba(40,35,30,.045);
+  transition:transform 1s var(--motion-soft),filter 1s var(--motion-soft);
+}
+.archive-card:hover img{transform:scale(1.025);filter:saturate(1.035)}
+.archive-card:focus-visible{
+  outline:2px solid var(--sage);
+  outline-offset:5px;
+}
+.archive-kicker{color:var(--sage-dark);font-size:10px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;margin-bottom:7px}
+.archive-section h2{margin:0}
+.archive-section .section-head{margin-bottom:28px}
+@media(max-width:980px){
+  .archive-grid{columns:2 260px}
+}
+@media(max-width:700px){
+  .gallery-page-hero{min-height:auto;padding:46px 0 54px}
+  .gallery-page-hero-card{min-height:420px;padding:28px;border-radius:28px}
+  .archive-section{padding-top:68px}
+  .archive-grid{columns:1}
+}
