@@ -22,21 +22,10 @@
   if ("IntersectionObserver" in window && !reduced) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-
-        const target = entry.target;
-        if (!target.style.getPropertyValue("--delay")) {
-          const siblings = Array.from(target.parentElement?.children || [])
-            .filter((el) =>
-              el.matches?.(".reveal,.reveal-left,.reveal-right,.home-transition")
-            );
-          const siblingIndex = Math.max(0, siblings.indexOf(target));
-          const stagger = Math.min(siblingIndex, 6) * 65;
-          target.style.setProperty("--delay", stagger + "ms");
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in");
+          observer.unobserve(entry.target);
         }
-
-        target.classList.add("in");
-        observer.unobserve(target);
       });
     }, { threshold:.12, rootMargin:"0px 0px -7% 0px" });
     items.forEach((el) => observer.observe(el));
@@ -47,87 +36,22 @@
   if (!reduced) {
     const glow = document.querySelector(".cursor-glow");
     if (glow && window.matchMedia("(pointer:fine)").matches) {
-      let glowX = window.innerWidth / 2;
-      let glowY = window.innerHeight / 2;
-      let targetGlowX = glowX;
-      let targetGlowY = glowY;
-      let glowFrame = 0;
-
-      const animateGlow = () => {
-        glowX += (targetGlowX - glowX) * 0.16;
-        glowY += (targetGlowY - glowY) * 0.16;
-        glow.style.transform = "translate3d(" + glowX + "px," + glowY + "px,0)";
-        glowFrame = requestAnimationFrame(animateGlow);
-      };
-
       document.addEventListener("pointermove", (event) => {
-        targetGlowX = event.clientX;
-        targetGlowY = event.clientY;
+        glow.style.transform = "translate3d(" + event.clientX + "px," + event.clientY + "px,0)";
         glow.classList.add("on");
       }, { passive:true });
-
       document.addEventListener("mouseleave", () => glow.classList.remove("on"));
-
-      animateGlow();
-
-      window.addEventListener("beforeunload", () => {
-        cancelAnimationFrame(glowFrame);
-      }, { once:true });
     }
 
     document.querySelectorAll("[data-tilt]").forEach((card) => {
-      let targetX = 0;
-      let targetY = 0;
-      let currentX = 0;
-      let currentY = 0;
-      let tiltFrame = 0;
-      let active = false;
-
-      const animateTilt = () => {
-        currentX += (targetX - currentX) * 0.14;
-        currentY += (targetY - currentY) * 0.14;
-
-        card.style.transform =
-          "perspective(900px) rotateX(" + currentX + "deg) rotateY(" + currentY + "deg) translateY(-7px)";
-
-        const settled =
-          Math.abs(targetX - currentX) < 0.02 &&
-          Math.abs(targetY - currentY) < 0.02;
-
-        if (settled && !active) {
-          currentX = targetX;
-          currentY = targetY;
-          card.style.transform = "";
-          tiltFrame = 0;
-          return;
-        }
-
-        tiltFrame = requestAnimationFrame(animateTilt);
-      };
-
-      const wakeTilt = () => {
-        if (!tiltFrame) {
-          tiltFrame = requestAnimationFrame(animateTilt);
-        }
-      };
-
       card.addEventListener("pointermove", (event) => {
         if (!window.matchMedia("(pointer:fine)").matches) return;
         const rect = card.getBoundingClientRect();
         const x = (event.clientX - rect.left) / rect.width;
         const y = (event.clientY - rect.top) / rect.height;
-        targetX = (.5 - y) * 5.5;
-        targetY = (x - .5) * 6.5;
-        active = true;
-        wakeTilt();
+        card.style.transform = "perspective(900px) rotateX(" + ((.5 - y) * 6) + "deg) rotateY(" + ((x - .5) * 7) + "deg) translateY(-7px)";
       });
-
-      card.addEventListener("pointerleave", () => {
-        targetX = 0;
-        targetY = 0;
-        active = false;
-        wakeTilt();
-      });
+      card.addEventListener("pointerleave", () => { card.style.transform = ""; });
     });
 
   const parallax = document.querySelectorAll("[data-parallax]");
