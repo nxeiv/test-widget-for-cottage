@@ -114,23 +114,114 @@
   window.addEventListener("online", setOfflineState);
   window.addEventListener("offline", setOfflineState);
 
+  const statusMeta = document.querySelector('meta[name="cottage-status-api"]');
+  const STATUS_API_URL = statusMeta?.content?.trim() || "/api/status";
   const liveMessages = document.querySelectorAll(".live-message,.smp-live-message");
   const liveStates = document.querySelectorAll(".live-state,.smp-live-state");
   const liveTimes = document.querySelectorAll(".live-time,.smp-live-time");
+  const liveDots = document.querySelectorAll(".live-dot");
 
-  const updateLiveShell = () => {
-    const now = new Date();
-    const label = now.toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"});
-    liveMessages.forEach((el) => el.textContent = navigator.onLine
-      ? "The page is connected. Live server data will appear here when the Cottage backend exposes it."
-      : "Your connection is offline right now.");
-    liveStates.forEach((el) => el.textContent = navigator.onLine ? "Connected" : "Offline");
-    liveTimes.forEach((el) => el.textContent = navigator.onLine ? "checked " + label : "connection lost");
+  let lastStatusCheck = null;
+  let statusRequestInFlight = false;
+
+  const formatRelativeCheck = () => {
+    if (!lastStatusCheck) return "not checked yet";
+    const elapsed = Math.max(0, Math.floor((Date.now() - lastStatusCheck) / 1000));
+    if (elapsed < 10) return "checked just now";
+    if (elapsed < 60) return "checked " + elapsed + "s ago";
+    const minutes = Math.floor(elapsed / 60);
+    return "checked " + minutes + "m ago";
   };
 
-  updateLiveShell();
-  window.addEventListener("online", updateLiveShell);
-  window.addEventListener("offline", updateLiveShell);
+  const setLiveVisual = ({message, state, colorState}) => {
+    liveMessages.forEach((el) => { el.textContent = message; });
+    liveStates.forEach((el) => { el.textContent = state; });
+    liveTimes.forEach((el) => { el.textContent = formatRelativeCheck(); });
+    liveDots.forEach((el) => {
+      el.dataset.state = colorState;
+      el.classList.toggle("live-dot-offline", colorState === "offline");
+      el.classList.toggle("live-dot-warning", colorState === "warning");
+    });
+  };
+
+  const renderMinecraftStatus = (data) => {
+    lastStatusCheck = Date.now();
+
+    const players = Number.isFinite(Number(data.players)) ? Number(data.players) : 0;
+    const playerText = players === 0
+      ? "Nobody else is playing right now."
+      : players === 1
+        ? "1 person is playing."
+        : players + " people are playing.";
+
+    if (data.state === "online") {
+      setLiveVisual({
+        message: players > 0 ? "The backyard is awake. People are around." : "The backyard is awake, just a little quiet.",
+        state: players > 0 ? playerText : "Online",
+        colorState: "online",
+      });
+      return;
+    }
+
+    if (data.state === "connecting" || data.state === "reconnecting") {
+      setLiveVisual({
+        message: "The backyard is waking up. The Cottage bot is reconnecting.",
+        state: data.state === "connecting" ? "Connecting" : "Reconnecting",
+        colorState: "warning",
+      });
+      return;
+    }
+
+    setLiveVisual({
+      message: "The backyard is asleep right now.",
+      state: "Offline",
+      colorState: "offline",
+    });
+  };
+
+  const fetchMinecraftStatus = async () => {
+    if (statusRequestInFlight) return;
+    statusRequestInFlight = true;
+
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 7000);
+
+    try {
+      const response = await fetch(STATUS_API_URL, {
+        method: "GET",
+        cache: "no-store",
+        headers: { Accept: "application/json" },
+        signal: controller.signal,
+      });
+
+      if (!response.ok) {
+        throw new Error("Status API returned " + response.status);
+      }
+
+      const data = await response.json();
+      renderMinecraftStatus(data);
+    } catch (error) {
+      setLiveVisual({
+        message: "The backyard status bridge is unavailable right now.",
+        state: "Unavailable",
+        colorState: "offline",
+      });
+    } finally {
+      window.clearTimeout(timeout);
+      statusRequestInFlight = false;
+    }
+  };
+
+  fetchMinecraftStatus();
+  window.setInterval(fetchMinecraftStatus, 30_000);
+  window.setInterval(() => {
+    if (lastStatusCheck) {
+      liveTimes.forEach((el) => { el.textContent = formatRelativeCheck(); });
+    }
+  }, 5000);
+
+  window.addEventListener("online", fetchMinecraftStatus);
+
 
   const intro = document.querySelector(".entrance-screen");
   if (intro) window.setTimeout(() => intro.remove(), 2400);
