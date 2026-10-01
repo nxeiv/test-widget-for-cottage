@@ -18,6 +18,35 @@
   window.addEventListener("scroll", updateProgress, { passive:true });
   window.addEventListener("scroll", updateNav, { passive:true });
 
+  // Mobile navigation
+  const mobileToggle = document.querySelector(".mobile-menu-toggle");
+  const mobileMenu = document.querySelector(".mobile-menu");
+
+  if (mobileToggle && mobileMenu) {
+    const setMobileMenu = (open) => {
+      mobileToggle.setAttribute("aria-expanded", open ? "true" : "false");
+      mobileToggle.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+      mobileMenu.setAttribute("aria-hidden", open ? "false" : "true");
+      document.body.classList.toggle("mobile-menu-open", open);
+    };
+
+    mobileToggle.addEventListener("click", () => {
+      setMobileMenu(mobileToggle.getAttribute("aria-expanded") !== "true");
+    });
+
+    mobileMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => setMobileMenu(false));
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") setMobileMenu(false);
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 700) setMobileMenu(false);
+    });
+  }
+
   const items = document.querySelectorAll(".reveal,.reveal-left,.reveal-right,.home-transition");
   if ("IntersectionObserver" in window && !reduced) {
     const observer = new IntersectionObserver((entries) => {
@@ -85,6 +114,24 @@
     }, { passive:true });
   }
 
+  // Gallery filters
+  document.querySelectorAll(".gallery-filter").forEach((button) => {
+    button.addEventListener("click", () => {
+      const filter = button.dataset.filter || "all";
+
+      document.querySelectorAll(".gallery-filter").forEach((item) => {
+        const active = item === button;
+        item.classList.toggle("is-active", active);
+        item.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+
+      document.querySelectorAll(".archive-card[data-category]").forEach((card) => {
+        const show = filter === "all" || card.dataset.category === filter;
+        card.classList.toggle("is-filtered", !show);
+      });
+    });
+  });
+
   const roomDetails = {
     home: {label:"01 · THE HOME", title:"The people are the center.", text:"There is no activity you have to do to belong here. The Cottage★ is the group first.", link:"#about", linkText:"Read the story →"},
     discord: {label:"02 · DISCORD", title:"Where the everyday stuff happens.", text:"Talk, calls, updates, jokes, quiet company, and the conversations that make the community feel like a home.", link:"#join", linkText:"Come to the door →"},
@@ -120,9 +167,22 @@
   const liveStates = document.querySelectorAll(".live-state,.smp-live-state");
   const liveTimes = document.querySelectorAll(".live-time,.smp-live-time");
   const liveDots = document.querySelectorAll(".live-dot");
+  const liveUptimes = document.querySelectorAll(".live-uptime,.smp-live-uptime");
+  const livePlayers = document.querySelectorAll(".live-players,.smp-live-players");
 
   let lastStatusCheck = null;
   let statusRequestInFlight = false;
+
+  const formatUptime = (seconds) => {
+    const total = Math.max(0, Number(seconds) || 0);
+    const days = Math.floor(total / 86400);
+    const hours = Math.floor((total % 86400) / 3600);
+    const minutes = Math.floor((total % 3600) / 60);
+
+    if (days > 0) return days + "d " + hours + "h";
+    if (hours > 0) return hours + "h " + minutes + "m";
+    return minutes + "m";
+  };
 
   const formatRelativeCheck = () => {
     if (!lastStatusCheck) return "not checked yet";
@@ -133,10 +193,12 @@
     return "checked " + minutes + "m ago";
   };
 
-  const setLiveVisual = ({message, state, colorState}) => {
+  const setLiveVisual = ({message, state, colorState, uptime = null, players = null}) => {
     liveMessages.forEach((el) => { el.textContent = message; });
     liveStates.forEach((el) => { el.textContent = state; });
     liveTimes.forEach((el) => { el.textContent = formatRelativeCheck(); });
+    liveUptimes.forEach((el) => { el.textContent = uptime === null ? "—" : formatUptime(uptime); });
+    livePlayers.forEach((el) => { el.textContent = players === null ? "—" : String(players); });
     liveDots.forEach((el) => {
       el.dataset.state = colorState;
       el.classList.toggle("live-dot-offline", colorState === "offline");
@@ -159,6 +221,8 @@
         message: players > 0 ? "The backyard is awake. People are around." : "The backyard is awake, just a little quiet.",
         state: players > 0 ? playerText : "Online",
         colorState: "online",
+        uptime: data.uptime,
+        players,
       });
       return;
     }
@@ -168,6 +232,8 @@
         message: "The backyard is waking up. The Cottage bot is reconnecting.",
         state: data.state === "connecting" ? "Connecting" : "Reconnecting",
         colorState: "warning",
+        uptime: null,
+        players: null,
       });
       return;
     }
@@ -176,6 +242,8 @@
       message: "The backyard is asleep right now.",
       state: "Offline",
       colorState: "offline",
+      uptime: null,
+      players: null,
     });
   };
 
@@ -205,6 +273,8 @@
         message: "The backyard status bridge is unavailable right now.",
         state: "Unavailable",
         colorState: "offline",
+        uptime: null,
+        players: null,
       });
     } finally {
       window.clearTimeout(timeout);
