@@ -979,3 +979,233 @@ html{scroll-padding-top:100px}
     animation-duration:1ms;
   }
 }
+
+
+/* ============================================================
+   Cottage★ — Micro details & ambient motion
+   ============================================================ */
+
+.hero-inner{
+  position:relative;
+}
+
+.micro-seal{
+  position:absolute !important;
+  width:104px;
+  height:104px;
+  right:-34px;
+  bottom:-28px;
+  opacity:.26;
+  pointer-events:none;
+  user-select:none;
+  transform-origin:center;
+  filter:drop-shadow(0 12px 26px rgba(72,57,38,.10));
+  animation:
+    cottageSealFloat 7.5s ease-in-out infinite,
+    cottageSealTurn 28s linear infinite;
+}
+
+.smp-hero-card .micro-seal,
+.gallery-page-hero-card .micro-seal{
+  right:30px;
+  bottom:28px;
+  width:112px;
+  height:112px;
+  opacity:.30;
+}
+
+.hero-note{
+  position:relative;
+  display:inline-block;
+  padding-left:18px;
+}
+
+.hero-note::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:50%;
+  width:9px;
+  height:1px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+  transform:translateY(-50%);
+  transform-origin:left center;
+  animation:cottageNoteLine 3.8s ease-in-out infinite;
+}
+
+.room-card::after{
+  content:"";
+  position:absolute;
+  right:13px;
+  bottom:13px;
+  width:22px;
+  height:22px;
+  border-right:1px solid rgba(127,147,111,.18);
+  border-bottom:1px solid rgba(127,147,111,.18);
+  border-radius:0 0 8px 0;
+  opacity:.42;
+  transform:translate3d(0,0,0);
+  transition:
+    width .55s var(--motion-spring),
+    height .55s var(--motion-spring),
+    opacity .45s ease,
+    border-color .45s ease;
+  pointer-events:none;
+}
+
+.room-card:hover::after,
+.room-card.active::after{
+  width:30px;
+  height:30px;
+  opacity:.72;
+  border-color:rgba(201,169,104,.34);
+}
+
+.fact{
+  position:relative;
+  overflow:hidden;
+}
+
+.fact::before{
+  content:"";
+  position:absolute;
+  left:13px;
+  top:13px;
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:rgba(201,169,104,.78);
+  box-shadow:0 0 0 4px rgba(201,169,104,.08);
+  animation:factPulse 4s ease-in-out infinite;
+}
+
+.fact span,
+.fact strong{
+  position:relative;
+  z-index:1;
+}
+
+.rule{
+  position:relative;
+  overflow:hidden;
+  transition:
+    transform .55s var(--motion-soft),
+    background .55s var(--motion-soft),
+    border-color .55s var(--motion-soft);
+}
+
+.rule::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:18px;
+  bottom:18px;
+  width:2px;
+  background:linear-gradient(180deg,transparent,var(--sage),transparent);
+  opacity:.18;
+  transform:scaleY(.35);
+  transform-origin:center;
+  transition:transform .6s var(--motion-spring),opacity .5s ease;
+}
+
+.rule:hover{
+  transform:translateX(3px);
+  background:rgba(255,253,248,.72);
+  border-color:rgba(127,147,111,.22);
+}
+
+.rule:hover::before{
+  transform:scaleY(1);
+  opacity:.55;
+}
+
+.archive-card::after,
+.moment-frame::after,
+.smp-shot::after{
+  content:"";
+  position:absolute;
+  right:12px;
+  top:12px;
+  width:16px;
+  height:16px;
+  border-top:1px solid rgba(201,169,104,.34);
+  border-right:1px solid rgba(201,169,104,.34);
+  opacity:0;
+  transform:translate3d(-3px,3px,0);
+  transition:opacity .5s ease,transform .65s var(--motion-spring);
+  pointer-events:none;
+  z-index:4;
+}
+
+.archive-card:hover::after,
+.moment-frame:hover::after,
+.smp-shot:hover::after{
+  opacity:.9;
+  transform:translate3d(0,0,0);
+}
+
+@keyframes cottageSealFloat{
+  0%,100%{transform:translate3d(0,0,0) rotate(-1deg)}
+  50%{transform:translate3d(0,-7px,0) rotate(1.5deg)}
+}
+
+@keyframes cottageSealTurn{
+  0%,85%,100%{filter:drop-shadow(0 12px 26px rgba(72,57,38,.10))}
+  92%{filter:drop-shadow(0 16px 34px rgba(201,169,104,.20))}
+}
+
+@keyframes cottageNoteLine{
+  0%,100%{transform:translateY(-50%) scaleX(.65);opacity:.52}
+  50%{transform:translateY(-50%) scaleX(1);opacity:1}
+}
+
+@keyframes factPulse{
+  0%,100%{opacity:.55;transform:scale(.9)}
+  50%{opacity:1;transform:scale(1.18)}
+}
+
+@media(max-width:700px){
+  .micro-seal{
+    width:72px;
+    height:72px;
+    right:-12px;
+    bottom:-18px;
+    opacity:.19;
+  }
+
+  .smp-hero-card .micro-seal,
+  .gallery-page-hero-card .micro-seal{
+    right:18px;
+    bottom:18px;
+    width:78px;
+    height:78px;
+    opacity:.20;
+  }
+
+  .hero-note{
+    padding-left:14px;
+  }
+
+  .room-card:hover::after,
+  .room-card.active::after{
+    width:26px;
+    height:26px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .micro-seal,
+  .hero-note::before,
+  .fact::before{
+    animation:none;
+  }
+
+  .room-card::after,
+  .rule,
+  .rule::before,
+  .archive-card::after,
+  .moment-frame::after,
+  .smp-shot::after{
+    transition:none;
+  }
+}
