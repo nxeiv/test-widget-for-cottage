@@ -271,37 +271,95 @@
       setGeometry(toRect);
     };
 
+    const getImageMetrics = async (img) => {
+      if (img.naturalWidth && img.naturalHeight) {
+        return { width: img.naturalWidth, height: img.naturalHeight };
+      }
+      return await new Promise((resolve) => {
+        const probe = new Image();
+        probe.onload = () => resolve({ width: probe.naturalWidth || 1600, height: probe.naturalHeight || 900 });
+        probe.onerror = () => resolve({ width:1600, height:900 });
+        probe.src = img.currentSrc || img.src;
+      });
+    };
+
+    const getTargetRectFromMetrics = (metrics) => {
+      const ratio = metrics.width / Math.max(metrics.height, 1);
+      const maxWidth = Math.min(window.innerWidth * 0.90, 1220);
+      const maxHeight = Math.min(window.innerHeight * 0.76, 860);
+      let width = maxWidth;
+      let height = width / ratio;
+      if (height > maxHeight) {
+        height = maxHeight;
+        width = height * ratio;
+      }
+      return {
+        left: (window.innerWidth - width) / 2,
+        top: Math.max(48, (window.innerHeight - height) / 2 - 22),
+        width,
+        height
+      };
+    };
+
+    const getCurrentViewerRect = () => ({
+      left: parseFloat(imageWrap.style.left) || 0,
+      top: parseFloat(imageWrap.style.top) || 0,
+      width: parseFloat(imageWrap.style.width) || lightbox.offsetWidth,
+      height: parseFloat(imageWrap.style.height) || lightbox.offsetHeight
+    });
+
     const animateBetween = async (direction) => {
       if (!isOpen || isAnimating || galleryImages.length < 2) return;
       isAnimating = true;
       hasNavigated = true;
+      imageWrap.classList.remove("is-dragging");
+      imageWrap.style.removeProperty("--drag-x");
 
-      const outAnimation = imageWrap.animate(
+      const nextIndex = (currentIndex + direction + galleryImages.length) % galleryImages.length;
+      const nextSource = galleryImages[nextIndex];
+      const nextMetrics = await getImageMetrics(nextSource);
+      const currentRect = getCurrentViewerRect();
+      const nextRect = getTargetRectFromMetrics(nextMetrics);
+
+      const outAnimation = lightboxImage.animate(
         [
           { opacity:1, transform:"translate3d(0,0,0) scale(1)" },
-          { opacity:0, transform:(direction > 0 ? "translate3d(-42px,0,0)" : "translate3d(42px,0,0)") + " scale(.965)" }
+          { opacity:0, transform:(direction > 0 ? "translate3d(-28px,0,0)" : "translate3d(28px,0,0)") + " scale(.985)" }
         ],
-        { duration:220, easing:"cubic-bezier(.7,0,.84,0)", fill:"forwards" }
+        { duration:190, easing:"cubic-bezier(.7,0,.84,0)", fill:"forwards" }
       );
 
       try { await outAnimation.finished; } catch (_) {}
-      applyImage(currentIndex + direction);
 
-      const inAnimation = imageWrap.animate(
+      applyImage(nextIndex);
+      setGeometry(currentRect);
+
+      const geometryAnimation = imageWrap.animate(
         [
-          { opacity:0, transform:(direction > 0 ? "translate3d(42px,0,0)" : "translate3d(-42px,0,0)") + " scale(.965)" },
-          { opacity:1, transform:"translate3d(0,0,0) scale(1)" }
+          { left:currentRect.left + "px", top:currentRect.top + "px", width:currentRect.width + "px", height:currentRect.height + "px" },
+          { left:nextRect.left + "px", top:nextRect.top + "px", width:nextRect.width + "px", height:nextRect.height + "px" }
         ],
-        { duration:360, easing:"cubic-bezier(.16,1,.3,1)", fill:"forwards" }
+        { duration:420, easing:"cubic-bezier(.16,1,.3,1)", fill:"forwards" }
       );
 
-      try { await inAnimation.finished; } catch (_) {}
-      imageWrap.style.opacity = "1";
+      const inAnimation = lightboxImage.animate(
+        [
+          { opacity:0, transform:(direction > 0 ? "translate3d(28px,0,0)" : "translate3d(-28px,0,0)") + " scale(.985)" },
+          { opacity:1, transform:"translate3d(0,0,0) scale(1)" }
+        ],
+        { duration:390, easing:"cubic-bezier(.16,1,.3,1)", fill:"forwards" }
+      );
+
+      try { await Promise.all([geometryAnimation.finished, inAnimation.finished]); } catch (_) {}
+
+      setGeometry(nextRect);
       imageWrap.style.transform = "";
+      lightboxImage.style.transform = "";
+      lightboxImage.style.opacity = "1";
       isAnimating = false;
     };
 
-    const open = async (index) => {
+        const open = async (index) => {
       if (isOpen || !galleryImages[index]) return;
 
       cancelViewerAnimations();
