@@ -874,3 +874,243 @@ html{scroll-padding-top:100px}
 .live-dot[data-state="online"]{background:var(--sage)}
 .live-dot[data-state="warning"]{background:var(--gold);box-shadow:0 0 0 6px rgba(201,169,104,.12)}
 .live-dot[data-state="offline"]{background:var(--rose);box-shadow:0 0 0 6px rgba(199,143,130,.12)}
+
+
+/* ============================================================
+   Cottage★ — Cinematic Smoothness Pass
+   ============================================================ */
+
+:root{
+  --motion-cinematic:cubic-bezier(.16,1,.3,1);
+  --motion-silk:cubic-bezier(.19,1,.22,1);
+  --motion-gentle:cubic-bezier(.22,1,.36,1);
+}
+
+body{
+  animation:pageArrive 900ms var(--motion-silk) both;
+}
+
+.topnav,
+.navlinks a,
+.btn,
+.activity,
+.feature-card,
+.bot-feature,
+.archive-card,
+.moment-frame,
+.smp-shot,
+.room-card,
+.live-panel,
+.fact,
+.lightbox-close,
+.lightbox-nav{
+  will-change:transform;
+}
+
+.navlinks a{
+  transition:
+    transform .55s var(--motion-silk),
+    color .5s var(--motion-silk),
+    background .5s var(--motion-silk);
+}
+
+.navlinks a:hover{
+  transform:translate3d(0,-3px,0);
+}
+
+.btn{
+  transition:
+    transform .7s var(--motion-silk),
+    box-shadow .7s var(--motion-silk),
+    background .55s var(--motion-silk),
+    border-color .55s var(--motion-silk);
+}
+
+.btn:hover{
+  transform:translate3d(0,-4px,0) rotateX(1deg);
+}
+
+[data-tilt]{
+  transition:transform .72s var(--motion-silk);
+}
+
+.reveal,
+.reveal-left,
+.reveal-right{
+  transition:
+    opacity 1.1s var(--motion-silk),
+    transform 1.1s var(--motion-silk),
+    filter 1.1s var(--motion-gentle);
+}
+
+.reveal{
+  transform:translate3d(0,34px,0) scale(.992);
+}
+
+.reveal-left{
+  transform:translate3d(-34px,0,0) scale(.992);
+}
+
+.reveal-right{
+  transform:translate3d(34px,0,0) scale(.992);
+}
+
+.reveal.in,
+.reveal-left.in,
+.reveal-right.in{
+  transform:translate3d(0,0,0) scale(1);
+}
+
+.story-card,
+.activity,
+.bot-showcase,
+.backyard-card,
+.invite-card,
+.feature-group,
+.paper,
+.feature-card,
+.bot-feature,
+.archive-card,
+.moment-frame,
+.smp-shot,
+.room-card,
+.fact{
+  transition:
+    transform .78s var(--motion-silk),
+    box-shadow .78s var(--motion-silk),
+    background .68s var(--motion-gentle),
+    border-color .68s var(--motion-gentle);
+}
+
+.activity:hover{
+  transform:translate3d(0,-9px,0) rotateX(2deg) rotateY(-2deg);
+}
+
+.feature-card:hover,
+.archive-card:hover,
+.moment-frame:hover,
+.smp-shot:hover{
+  transform:translate3d(0,-6px,0) scale(1.006);
+}
+
+.feature-card::after,
+.archive-card::before,
+.moment-frame::before,
+.smp-shot::before{
+  transition:opacity .7s var(--motion-gentle);
+}
+
+.archive-card img,
+.moment-frame .moment-image,
+.smp-shot img{
+  transition:
+    transform 1.15s var(--motion-silk),
+    filter 1.15s var(--motion-gentle);
+}
+
+.archive-card:hover img,
+.moment-frame:hover .moment-image,
+.smp-shot:hover img{
+  transform:scale(1.018);
+}
+
+.journal-entry{
+  transition:
+    transform .65s var(--motion-silk),
+    background .65s var(--motion-gentle);
+}
+
+.journal-entry:hover{
+  transform:translate3d(3px,0,0);
+}
+
+.journal-entry h3{
+  transition:transform .65s var(--motion-silk);
+}
+
+.live-dot{
+  transition:
+    background .8s var(--motion-gentle),
+    box-shadow .8s var(--motion-gentle),
+    transform .8s var(--motion-silk);
+}
+
+.cursor-glow{
+  transition:
+    opacity .35s ease,
+    transform .28s var(--motion-silk);
+  will-change:transform,opacity;
+}
+
+.cottage-lightbox{
+  transition:
+    opacity .6s var(--motion-silk),
+    visibility 0s linear .68s;
+}
+
+.cottage-lightbox.is-open{
+  transition-delay:0s;
+}
+
+.lightbox-image-wrap{
+  transition:
+    box-shadow .8s var(--motion-silk),
+    border-color .7s var(--motion-gentle);
+}
+
+.lightbox-close,
+.lightbox-nav{
+  transition:
+    transform .55s var(--motion-silk),
+    background .55s var(--motion-gentle),
+    border-color .55s var(--motion-gentle),
+    opacity .5s var(--motion-gentle);
+}
+
+@keyframes pageArrive{
+  from{opacity:0;transform:translate3d(0,8px,0)}
+  to{opacity:1;transform:translate3d(0,0,0)}
+}
+
+@media(max-width:700px){
+  .reveal,
+  .reveal-left,
+  .reveal-right{
+    transition-duration:.95s;
+  }
+
+  .archive-card:hover,
+  .moment-frame:hover,
+  .smp-shot:hover,
+  .feature-card:hover{
+    transform:translate3d(0,-4px,0) scale(1.004);
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  body{animation:none}
+  .cursor-glow{transition:none}
+  .story-card,
+  .activity,
+  .bot-showcase,
+  .backyard-card,
+  .invite-card,
+  .feature-group,
+  .paper,
+  .feature-card,
+  .bot-feature,
+  .archive-card,
+  .moment-frame,
+  .smp-shot,
+  .room-card,
+  .fact,
+  .journal-entry,
+  .btn,
+  .navlinks a,
+  [data-tilt],
+  .live-dot,
+  .lightbox-close,
+  .lightbox-nav{
+    transition:none;
+  }
+}
