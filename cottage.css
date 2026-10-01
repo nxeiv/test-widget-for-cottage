@@ -181,11 +181,11 @@ a{color:inherit}.page-bg{position:fixed;inset:-15%;z-index:-4;pointer-events:non
 :root{--motion-spring:cubic-bezier(.12,.88,.24,1);--motion-soft:cubic-bezier(.22,1,.36,1)}
 html{scroll-padding-top:100px}
 .reveal,.reveal-left,.reveal-right{
-  filter:blur(8px);
-  will-change:transform,opacity,filter;
+  filter:none;
+  will-change:transform,opacity,transform;
 }
 .reveal.in,.reveal-left.in,.reveal-right.in{
-  filter:blur(0);
+  filter:none;
 }
 .topnav{
   transition:background .6s var(--motion-soft),box-shadow .6s var(--motion-soft),transform .6s var(--motion-soft),border-color .6s var(--motion-soft);
@@ -874,3 +874,16 @@ html{scroll-padding-top:100px}
 .live-dot[data-state="online"]{background:var(--sage)}
 .live-dot[data-state="warning"]{background:var(--gold);box-shadow:0 0 0 6px rgba(201,169,104,.12)}
 .live-dot[data-state="offline"]{background:var(--rose);box-shadow:0 0 0 6px rgba(199,143,130,.12)}
+
+
+/* Final visibility safeguard: mobile content must never depend on motion JS. */
+@media(max-width:700px){
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .home-transition{
+    opacity:1 !important;
+    transform:none !important;
+    filter:none !important;
+  }
+}
