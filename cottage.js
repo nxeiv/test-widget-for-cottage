@@ -134,4 +134,295 @@
 
   const intro = document.querySelector(".entrance-screen");
   if (intro) window.setTimeout(() => intro.remove(), 2400);
+
+  // Cinematic image viewer
+  const galleryImages = Array.from(document.querySelectorAll(".moment-image, .smp-shot img"));
+  if (galleryImages.length) {
+    const lightbox = document.createElement("div");
+    lightbox.className = "cottage-lightbox";
+    lightbox.setAttribute("aria-hidden", "true");
+    lightbox.innerHTML = `
+      <div class="lightbox-backdrop" data-lightbox-close></div>
+      <div class="lightbox-ambient" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="lightbox-shell" role="dialog" aria-modal="true" aria-label="Image viewer">
+        <button class="lightbox-close" type="button" aria-label="Close image viewer">×</button>
+        <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous image">‹</button>
+        <div class="lightbox-stage">
+          <div class="lightbox-image-wrap">
+            <img class="lightbox-image" alt="">
+            <span class="lightbox-image-sheen" aria-hidden="true"></span>
+          </div>
+        </div>
+        <button class="lightbox-nav lightbox-next" type="button" aria-label="Next image">›</button>
+        <div class="lightbox-meta">
+          <span class="lightbox-counter"></span>
+          <span class="lightbox-caption"></span>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(lightbox);
+
+    const backdrop = lightbox.querySelector(".lightbox-backdrop");
+    const imageWrap = lightbox.querySelector(".lightbox-image-wrap");
+    const lightboxImage = lightbox.querySelector(".lightbox-image");
+    const closeButton = lightbox.querySelector(".lightbox-close");
+    const prevButton = lightbox.querySelector(".lightbox-prev");
+    const nextButton = lightbox.querySelector(".lightbox-next");
+    const counter = lightbox.querySelector(".lightbox-counter");
+    const caption = lightbox.querySelector(".lightbox-caption");
+    const stage = lightbox.querySelector(".lightbox-stage");
+
+    let currentIndex = 0;
+    let previousFocused = null;
+    let isOpen = false;
+    let isAnimating = false;
+    let touchStartX = 0;
+    let touchDeltaX = 0;
+
+    galleryImages.forEach((img, index) => {
+      img.setAttribute("tabindex", "0");
+      img.setAttribute("role", "button");
+      img.setAttribute("aria-label", "Open image " + (index + 1));
+
+      const openFromKeyboard = (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          open(index);
+        }
+      };
+
+      img.addEventListener("click", () => open(index));
+      img.addEventListener("keydown", openFromKeyboard);
+    });
+
+    const getCaption = (img) => {
+      const figure = img.closest("figure");
+      const figureCaption = figure ? figure.querySelector("figcaption") : null;
+      return figureCaption ? figureCaption.textContent.trim() : (img.alt || "The Cottage★");
+    };
+
+    const getTargetRect = (img) => {
+      const naturalWidth = img.naturalWidth || 1600;
+      const naturalHeight = img.naturalHeight || 900;
+      const ratio = naturalWidth / naturalHeight;
+      const maxWidth = Math.min(window.innerWidth * 0.90, 1220);
+      const maxHeight = Math.min(window.innerHeight * 0.76, 860);
+      let width = maxWidth;
+      let height = width / ratio;
+      if (height > maxHeight) {
+        height = maxHeight;
+        width = height * ratio;
+      }
+      return {
+        left: (window.innerWidth - width) / 2,
+        top: Math.max(48, (window.innerHeight - height) / 2 - 22),
+        width,
+        height
+      };
+    };
+
+    const setMeta = (img, index) => {
+      counter.textContent = String(index + 1).padStart(2, "0") + " / " + String(galleryImages.length).padStart(2, "0");
+      caption.textContent = getCaption(img);
+      prevButton.disabled = galleryImages.length < 2;
+      nextButton.disabled = galleryImages.length < 2;
+    };
+
+    const applyImage = (index) => {
+      currentIndex = (index + galleryImages.length) % galleryImages.length;
+      const source = galleryImages[currentIndex];
+      lightboxImage.src = source.currentSrc || source.src;
+      lightboxImage.alt = source.alt || "The Cottage★ image";
+      setMeta(source, currentIndex);
+    };
+
+    const animateBetween = (direction) => {
+      if (isAnimating || galleryImages.length < 2) return;
+      isAnimating = true;
+
+      if (reduced) {
+        imageWrap.style.opacity = "0";
+        imageWrap.style.transform = direction > 0 ? "translateX(22px) scale(.985)" : "translateX(-22px) scale(.985)";
+        window.setTimeout(() => {
+          applyImage(currentIndex + direction);
+          imageWrap.animate(
+            [
+              { opacity:0, transform: direction > 0 ? "translateX(-22px) scale(.985)" : "translateX(22px) scale(.985)" },
+              { opacity:1, transform:"none" }
+            ],
+            { duration:220, easing:"ease-out", fill:"forwards" }
+          ).finished.finally(() => { isAnimating = false; });
+        }, 40);
+        return;
+      }
+
+      imageWrap.animate(
+        [
+          { opacity:1, transform:"translate3d(0,0,0) scale(1)" },
+          { opacity:0, transform:(direction > 0 ? "translate3d(-42px,0,0)" : "translate3d(42px,0,0)") + " scale(.965)" }
+        ],
+        { duration:230, easing:"cubic-bezier(.7,0,.84,0)", fill:"forwards" }
+      ).finished.then(() => {
+        applyImage(currentIndex + direction);
+        imageWrap.animate(
+          [
+            { opacity:0, transform:(direction > 0 ? "translate3d(42px,0,0)" : "translate3d(-42px,0,0)") + " scale(.965)" },
+            { opacity:1, transform:"translate3d(0,0,0) scale(1)" }
+          ],
+          { duration:380, easing:"cubic-bezier(.16,1,.3,1)", fill:"forwards" }
+        ).finished.finally(() => { isAnimating = false; });
+      }).catch(() => { isAnimating = false; });
+    };
+
+    const animateOpen = (source) => {
+      const sourceRect = source.getBoundingClientRect();
+      const target = getTargetRect(source);
+      const dx = target.left - sourceRect.left;
+      const dy = target.top - sourceRect.top;
+      const sx = target.width / Math.max(sourceRect.width, 1);
+      const sy = target.height / Math.max(sourceRect.height, 1);
+
+      imageWrap.style.left = "0px";
+      imageWrap.style.top = "0px";
+      imageWrap.style.width = sourceRect.width + "px";
+      imageWrap.style.height = sourceRect.height + "px";
+      imageWrap.style.transform = "translate3d(" + sourceRect.left + "px," + sourceRect.top + "px,0) scale(1)";
+      imageWrap.style.transformOrigin = "top left";
+      imageWrap.style.opacity = "1";
+
+      if (reduced) {
+        imageWrap.animate([{opacity:0, transform:"translate3d(" + target.left + "px," + target.top + "px,0) scale(" + sx + "," + sy + ")"},{opacity:1, transform:"translate3d(" + target.left + "px," + target.top + "px,0) scale(" + sx + "," + sy + ")"}], {duration:180, fill:"forwards"}).finished.finally(() => { isAnimating = false; });
+        return;
+      }
+
+      imageWrap.animate(
+        [
+          { transform:"translate3d(" + sourceRect.left + "px," + sourceRect.top + "px,0) scale(1)", borderRadius:"24px" },
+          { transform:"translate3d(" + target.left + "px," + target.top + "px,0) scale(" + sx + "," + sy + ")", borderRadius:"28px" }
+        ],
+        { duration:760, easing:"cubic-bezier(.16,1,.3,1)", fill:"forwards" }
+      ).finished.finally(() => { isAnimating = false; });
+    };
+
+    const resetLightboxGeometry = () => {
+      imageWrap.style.width = "";
+      imageWrap.style.height = "";
+      imageWrap.style.left = "";
+      imageWrap.style.top = "";
+      imageWrap.style.transform = "";
+      imageWrap.style.transformOrigin = "";
+      imageWrap.style.opacity = "";
+    };
+
+    const open = (index) => {
+      if (isOpen) return;
+      const source = galleryImages[index];
+      if (!source) return;
+
+      previousFocused = document.activeElement;
+      currentIndex = index;
+      applyImage(index);
+      isOpen = true;
+      isAnimating = true;
+      document.body.classList.add("lightbox-open");
+      lightbox.classList.add("is-open", "is-opening");
+      lightbox.setAttribute("aria-hidden", "false");
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          animateOpen(source);
+          lightbox.classList.remove("is-opening");
+          window.setTimeout(() => closeButton.focus(), 420);
+        });
+      });
+    };
+
+    const close = () => {
+      if (!isOpen || isAnimating) return;
+
+      const source = galleryImages[currentIndex];
+      const sourceRect = source ? source.getBoundingClientRect() : null;
+      const target = getTargetRect(source || galleryImages[0]);
+      isAnimating = true;
+
+      if (reduced || !sourceRect) {
+        lightbox.animate([{opacity:1},{opacity:0}], {duration:180, fill:"forwards"}).finished.finally(finishClose);
+        return;
+      }
+
+      const currentX = target.left;
+      const currentY = target.top;
+      const currentScaleX = target.width / Math.max(sourceRect.width, 1);
+      const currentScaleY = target.height / Math.max(sourceRect.height, 1);
+
+      imageWrap.animate(
+        [
+          { transform:"translate3d(" + currentX + "px," + currentY + "px,0) scale(" + currentScaleX + "," + currentScaleY + ")", borderRadius:"28px", opacity:1 },
+          { transform:"translate3d(" + sourceRect.left + "px," + sourceRect.top + "px,0) scale(1)", borderRadius:"24px", opacity:.92 }
+        ],
+        { duration:620, easing:"cubic-bezier(.7,0,.84,0)", fill:"forwards" }
+      ).finished.finally(finishClose);
+    };
+
+    const finishClose = () => {
+      lightbox.classList.remove("is-open", "is-closing");
+      lightbox.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("lightbox-open");
+      resetLightboxGeometry();
+      isOpen = false;
+      isAnimating = false;
+      if (previousFocused && typeof previousFocused.focus === "function") previousFocused.focus();
+    };
+
+    closeButton.addEventListener("click", close);
+    backdrop.addEventListener("click", close);
+    prevButton.addEventListener("click", () => animateBetween(-1));
+    nextButton.addEventListener("click", () => animateBetween(1));
+
+    window.addEventListener("keydown", (event) => {
+      if (!isOpen) return;
+      if (event.key === "Escape") close();
+      if (event.key === "ArrowLeft") animateBetween(-1);
+      if (event.key === "ArrowRight") animateBetween(1);
+    });
+
+    stage.addEventListener("pointerdown", (event) => {
+      if (!isOpen) return;
+      touchStartX = event.clientX;
+      touchDeltaX = 0;
+      stage.setPointerCapture?.(event.pointerId);
+    });
+
+    stage.addEventListener("pointermove", (event) => {
+      if (!isOpen || !touchStartX) return;
+      touchDeltaX = event.clientX - touchStartX;
+      if (Math.abs(touchDeltaX) > 12) {
+        imageWrap.style.setProperty("--drag-x", touchDeltaX + "px");
+        imageWrap.classList.add("is-dragging");
+      }
+    });
+
+    stage.addEventListener("pointerup", () => {
+      if (!isOpen) return;
+      imageWrap.classList.remove("is-dragging");
+      imageWrap.style.removeProperty("--drag-x");
+      if (Math.abs(touchDeltaX) > 58) animateBetween(touchDeltaX < 0 ? 1 : -1);
+      touchStartX = 0;
+      touchDeltaX = 0;
+    });
+
+    stage.addEventListener("pointercancel", () => {
+      imageWrap.classList.remove("is-dragging");
+      imageWrap.style.removeProperty("--drag-x");
+      touchStartX = 0;
+      touchDeltaX = 0;
+    });
+
+    window.addEventListener("resize", () => {
+      if (!isOpen || isAnimating) return;
+      const target = getTargetRect(galleryImages[currentIndex]);
+      imageWrap.style.transform = "translate3d(" + target.left + "px," + target.top + "px,0) scale(" + (target.width / Math.max(imageWrap.offsetWidth,1)) + "," + (target.height / Math.max(imageWrap.offsetHeight,1)) + ")";
+    });
+  }
+
 })();
