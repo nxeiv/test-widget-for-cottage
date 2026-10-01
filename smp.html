@@ -13,11 +13,29 @@
 <link rel="stylesheet" href="cottage.css">
 </head>
 <body>
+<a class="skip-link" href="#gallery">Skip to content</a>
 <div class="page-bg" aria-hidden="true"></div><div class="orb-layer" aria-hidden="true"><div class="orb one"></div><div class="orb two"></div><div class="orb three"></div></div><div class="cursor-glow" aria-hidden="true"></div><div class="progress" aria-hidden="true"><span></span></div>
 <div class="shell">
-<nav class="topnav reveal" style="--delay:40ms"><a class="brand-mini" href="index.html"><img src="IMG_8048-modified.png" alt=""><span>The Cottage★</span></a><div class="navlinks"><a href="index.html">The Home</a><a href="gallery.html">Gallery</a><a href="#features">Features</a><a href="#rules">Rules</a><a href="https://the-cottage.onrender.com/" class="nav-pill">Discord</a></div></nav>
+<nav class="topnav reveal" style="--delay:40ms">
+<a class="brand-mini" href="index.html"><img src="IMG_8048-modified.png" alt="The Cottage★ home"><span>The Cottage★</span></a>
+<div class="navlinks"><a href="index.html">The Home</a><a href="gallery.html">Gallery</a><a href="#features">Features</a><a href="#rules">Rules</a><a href="https://the-cottage.onrender.com/" class="nav-pill">Discord</a></div>
+<button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation"><span></span><span></span><span></span></button>
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <a href="index.html">The Home</a><a href="gallery.html">Gallery</a><a href="#features">Features</a><a href="#rules">Rules</a><a href="https://the-cottage.onrender.com/" class="mobile-menu-pill">Discord</a>
+</div>
+</nav>
 
-<header class="smp-hero"><div class="smp-hero-card smp-map-hero reveal"><img class="micro-seal" src="Media/cottage-seal.svg" alt="" aria-hidden="true"><div class="smp-hero-title"><div class="eyebrow">The Cottage★ · Chapter 1 • Season 5</div><h1>The Cottage★ SMP</h1><p>A shared Minecraft world for the people who call The Cottage★ home. It's an activity inside the community — a place to build, explore, mess around, and make more memories together.</p><div class="smp-facts"><div class="fact"><span>Gamemode</span><strong>Hardcore survival</strong></div><div class="fact"><span>Access</span><strong>Invite Only</strong></div><div class="fact"><span>Platforms</span><strong>Java + Bedrock</strong></div><div class="fact"><span>Voice</span><strong>Proximity Chat</strong></div></div></div></div></header>
+<header class="smp-hero"><div class="smp-hero-card smp-map-hero reveal">
+<div class="smp-map-overlay" aria-hidden="true">
+  <div class="smp-map-grid"></div>
+  <div class="smp-compass"><span>N</span><i></i></div>
+  <span class="smp-marker marker-home">HOME</span>
+  <span class="smp-marker marker-path">PATH</span>
+  <span class="smp-marker marker-yard">BACKYARD</span>
+  <span class="smp-map-code">C1 / S5</span>
+  <span class="smp-map-scale">01 — SHARED WORLD</span>
+</div>
+<img class="micro-seal" src="Media/cottage-seal.svg" alt="" aria-hidden="true"><div class="smp-hero-title"><div class="eyebrow">The Cottage★ · Chapter 1 • Season 5</div><h1>The Cottage★ SMP</h1><p>A shared Minecraft world for the people who call The Cottage★ home. It's an activity inside the community — a place to build, explore, mess around, and make more memories together.</p><div class="smp-facts"><div class="fact"><span>Gamemode</span><strong>Hardcore survival</strong></div><div class="fact"><span>Access</span><strong>Invite Only</strong></div><div class="fact"><span>Platforms</span><strong>Java + Bedrock</strong></div><div class="fact"><span>Voice</span><strong>Proximity Chat</strong></div></div></div></div></header>
 
 <section class="section smp-gallery-section" id="gallery">
   <div class="section-head reveal">
@@ -42,7 +60,12 @@
 
 <section class="section smp-live-section" id="status">
   <div class="live-panel paper reveal">
-    <div class="live-copy"><div class="eyebrow">Backyard status</div><h2>Is the backyard awake?</h2><p class="live-message smp-live-message">Checking…</p><div class="live-meta"><span class="live-dot"></span><span class="live-state smp-live-state">Checking</span><span class="live-time smp-live-time">just now</span></div></div>
+    <div class="live-copy"><div class="eyebrow">Backyard status</div><h2>Is the backyard awake?</h2><p class="live-message smp-live-message">Checking…</p><div class="live-meta"><span class="live-dot"></span><span class="live-state smp-live-state">Checking</span><span class="live-time smp-live-time">just now</span></div>
+<div class="live-stats" aria-live="polite">
+  <div><span>SESSION</span><strong class="live-uptime smp-live-uptime">—</strong></div>
+  <div><span>PLAYERS</span><strong class="live-players smp-live-players">—</strong></div>
+</div>
+</div>
     <div class="live-orbit" aria-hidden="true"><span></span><span></span><span></span><strong>PLAY</strong></div>
   </div>
   <p class="live-note">Live Minecraft status comes directly from the Cottage★ Bot. The public page never prints the Minecraft server address.</p>
