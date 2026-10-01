@@ -54,6 +54,18 @@
       card.addEventListener("pointerleave", () => { card.style.transform = ""; });
     });
 
+    document.querySelectorAll(".btn.primary").forEach((btn) => {
+      btn.addEventListener("pointermove", (event) => {
+        if (!window.matchMedia("(pointer:fine)").matches) return;
+        const rect = btn.getBoundingClientRect();
+        const x = (event.clientX - rect.left - rect.width / 2) * .08;
+        const y = (event.clientY - rect.top - rect.height / 2) * .08;
+        btn.style.transform = "translate3d(" + x + "px," + y + "px,0) translateY(-5px)";
+      });
+      btn.addEventListener("pointerleave", () => { btn.style.transform = ""; });
+    });
+  }
+
   const parallax = document.querySelectorAll("[data-parallax]");
   if (parallax.length && !reduced) {
     let ticking = false;
